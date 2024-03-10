@@ -1,9 +1,8 @@
 "use client";
 
-import { Form, useFormikContext } from "formik";
+import { Form } from "formik";
 import { Card, Flex } from "antd";
 import { useEffect, useState } from "react";
-import { ILogin } from "@/app/page";
 import AppButton from "@/components/button";
 import AppTextInput from "@/components/textInput";
 
@@ -12,7 +11,6 @@ const LoginForm = () => {
   useEffect(() => {
     setWindowHeight(window.innerHeight);
   }, []);
-  const { values, handleChange } = useFormikContext<ILogin>();
   return (
     <Form>
       <Flex
