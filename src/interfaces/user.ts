@@ -1,4 +1,4 @@
-export type userType = "Admin" | "Employee" | "Customer";
+export type userType = "Admin" | "Employee" | "Internal";
 
 export interface IUser {
   username: string;

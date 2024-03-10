@@ -11,6 +11,7 @@ import { useUserStore } from "@/stores/userStore";
 import { useSystemStore } from "@/stores/systemStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { urls } from "@/constants";
 
 export default function Login() {
   const user = useUserStore((state) => state.user);
@@ -25,7 +26,7 @@ export default function Login() {
     onSuccess(data, _variables, _context) {
       setUserType(data.userType);
       setToken(data.token);
-      router.push("home");
+      router.push(urls.home);
     },
     onError(_error) {
       // setShowModal(true);

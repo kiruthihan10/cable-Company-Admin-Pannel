@@ -3,8 +3,8 @@
 import { Form } from "formik";
 import { Card, Flex } from "antd";
 import { useEffect, useState } from "react";
-import AppButton from "@/components/button";
-import AppTextInput from "@/components/textInput";
+import AppButton from "@/components/unitComponents/button";
+import AppTextInput from "@/components/unitComponents/textInput";
 
 const LoginForm = () => {
   const [windowHeight, setWindowHeight] = useState(0);

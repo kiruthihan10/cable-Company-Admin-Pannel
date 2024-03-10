@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Layout } from "antd";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Providers from "@/external/providers";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/complexComponents/navbar";
+import Header from "@/components/complexComponents/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +32,10 @@ export default function RootLayout({
         }}
       >
         <Providers>
-          <Navbar>
-            <body className={inter.className}>{children}</body>
-          </Navbar>
+          <body className={inter.className}>
+            <Header />
+            <Navbar>{children}</Navbar>
+          </body>
         </Providers>
       </ConfigProvider>
     </html>

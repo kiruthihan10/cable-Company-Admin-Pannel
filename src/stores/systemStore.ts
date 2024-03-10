@@ -1,19 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type header =
+export type header =
   | "Login"
   | "Employees"
-  | "Create Employee"
-  | "View Employee"
   | "Customers"
-  | "Add Customer"
-  | "View Customer"
-  | "Add Payment"
-  | "Past Payments"
   | "Payments"
-  | "Settings"
-  | "Update Customer"
+  | "Companies"
   | "Areas";
 
 interface ISystemStoreState {

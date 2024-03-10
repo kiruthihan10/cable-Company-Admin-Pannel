@@ -1,3 +1,4 @@
+import { userType } from "@/interfaces/user";
 import axios from "axios";
 
 export interface ILoginRequest {
@@ -7,7 +8,7 @@ export interface ILoginRequest {
 
 interface ILoginResponse {
   token: string;
-  userType: "Admin" | "Employee" | "Customer";
+  userType: userType;
 }
 
 const baseURL =
