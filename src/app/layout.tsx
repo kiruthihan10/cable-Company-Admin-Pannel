@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConfigProvider } from "antd";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Providers from "@/external/providers";
+import Navbar from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +25,16 @@ export default function RootLayout({
           token: {},
           components: {
             Card: {
-              headerBg : '#b5f5ec'
-            }
-          }
+              headerBg: "#b5f5ec",
+            },
+          },
         }}
       >
-        <body className={inter.className}>{children}</body>
+        <Providers>
+          <Navbar>
+            <body className={inter.className}>{children}</body>
+          </Navbar>
+        </Providers>
       </ConfigProvider>
     </html>
   );

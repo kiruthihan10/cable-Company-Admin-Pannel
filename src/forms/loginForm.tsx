@@ -30,7 +30,7 @@ const LoginForm = () => {
               placeholder="Password"
               label="Password"
             />
-            <AppButton formik center text={"Login"} />
+            <AppButton formik center text={"Login"} isSubmit />
           </Flex>
         </Card>
       </Flex>
