@@ -1,6 +1,6 @@
 import { Input, Typography } from "antd";
 import { useField } from "formik";
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 interface IAppTextInput {
   name: string;
@@ -10,8 +10,7 @@ interface IAppTextInput {
 
 const AppTextInput = (props: IAppTextInput) => {
   const { name, placeholder, label } = props;
-  const [{ value, onChange }, { error, touched }, { setTouched }] =
-    useField(name);
+  const [{ value, onChange }, { error }, {}] = useField(name);
 
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>

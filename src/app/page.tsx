@@ -5,8 +5,7 @@ import styles from "./page.module.css";
 import * as Yup from "yup";
 import LoginForm from "@/forms/loginForm";
 
-export interface ILogin
-{
+export interface ILogin {
   username: string;
   password: string;
 }
@@ -25,7 +24,7 @@ export default function Home() {
       <Formik
         initialValues={initialValues}
         validationSchema={loginSchema}
-        enableReinitialize 
+        enableReinitialize
         onSubmit={function (
           values: FormikValues,
           formikHelpers: FormikHelpers<FormikValues>

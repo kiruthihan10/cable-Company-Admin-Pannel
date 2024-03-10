@@ -1,9 +1,7 @@
 "use client";
 
 import { Form, useFormikContext } from "formik";
-import { Card, Flex, Input, Typography } from "antd";
-
-const { Text } = Typography;
+import { Card, Flex } from "antd";
 import { useEffect, useState } from "react";
 import { ILogin } from "@/app/page";
 import AppButton from "@/components/button";
@@ -34,7 +32,7 @@ const LoginForm = () => {
               placeholder="Password"
               label="Password"
             />
-            <AppButton formik center/>
+            <AppButton formik center text={"Login"} />
           </Flex>
         </Card>
       </Flex>
