@@ -12,7 +12,7 @@ import { useSystemStore } from "@/stores/systemStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Home() {
+export default function Login() {
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const setUserType = useUserStore((state) => state.setUserType);
@@ -25,7 +25,7 @@ export default function Home() {
     onSuccess(data, _variables, _context) {
       setUserType(data.userType);
       setToken(data.token);
-      // redirectUser(data.userType);
+      router.push("home");
     },
     onError(_error) {
       // setShowModal(true);
