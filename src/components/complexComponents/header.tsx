@@ -2,7 +2,7 @@
 
 import { useSystemStore, header } from "@/stores/systemStore";
 import { useUserStore } from "@/stores/userStore";
-import { Flex, Typography } from "antd";
+import { Divider, Flex, Typography } from "antd";
 
 const Header = () => {
   const header = useSystemStore((state) => state.header);
@@ -39,6 +39,10 @@ const Header = () => {
           Cable <br />
           Companies
         </Typography.Title>
+        <Divider
+          type="vertical"
+          style={{ backgroundColor: "black", height: "80%" }}
+        />
         {renderHeaderTiles()}
       </Flex>
     </Flex>
