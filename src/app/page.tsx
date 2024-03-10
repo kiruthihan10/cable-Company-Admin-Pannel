@@ -1,28 +1,40 @@
 "use client";
 
+import { Formik, FormikHelpers, FormikValues } from "formik";
 import styles from "./page.module.css";
-import { Button, Card, Flex, Input, Typography } from "antd";
+import * as Yup from "yup";
+import LoginForm from "@/forms/loginForm";
+
+export interface ILogin
+{
+  username: string;
+  password: string;
+}
 
 export default function Home() {
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+  const loginSchema = Yup.object().shape({
+    username: Yup.string().required(),
+    password: Yup.string().required(),
+  });
   return (
     <main className={styles.main}>
-      <Flex
-        justify={"center"}
-        align={"center"}
-        style={{ height: `${window.innerHeight}px` }}
+      <Formik
+        initialValues={initialValues}
+        validationSchema={loginSchema}
+        enableReinitialize 
+        onSubmit={function (
+          values: FormikValues,
+          formikHelpers: FormikHelpers<FormikValues>
+        ): void | Promise<any> {
+          throw new Error("Function not implemented.");
+        }}
       >
-        <Card title="Login" style={{ width: 300 }} >
-          <Flex vertical gap="small" style={{ width: "100%" }}>
-            <Typography.Title level={5}>Username</Typography.Title>
-            <Input placeholder="Username" />
-            <Typography.Title level={5}>Password</Typography.Title>
-            <Input.Password placeholder="Password" />
-            <Flex justify={"center"} align={"center"}>
-              <Button type="primary">Login</Button>
-            </Flex>
-          </Flex>
-        </Card>
-      </Flex>
+        <LoginForm />
+      </Formik>
     </main>
   );
 }
