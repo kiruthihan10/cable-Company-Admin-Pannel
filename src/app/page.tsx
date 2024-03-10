@@ -51,7 +51,7 @@ export default function Login() {
     return mutate(values);
   };
   return (
-    <main className={styles.main}>
+    <main>
       <Formik
         initialValues={initialValues}
         validationSchema={loginSchema}

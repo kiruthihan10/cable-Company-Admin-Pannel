@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ConfigProvider, Layout } from "antd";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { ConfigProvider } from "antd";
 import Providers from "@/external/providers";
 import Navbar from "@/components/complexComponents/navbar";
 import Header from "@/components/complexComponents/header";
@@ -32,7 +31,7 @@ export default function RootLayout({
         }}
       >
         <Providers>
-          <body className={inter.className}>
+          <body>
             <Header />
             <Navbar>{children}</Navbar>
           </body>

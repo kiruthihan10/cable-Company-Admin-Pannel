@@ -33,7 +33,13 @@ const Header = () => {
     return tiles;
   };
   return (
-    <Flex justify={"space-between"}>
+    <Flex
+      justify={"space-between"}
+      style={{
+        position: "fixed",
+        top: 0,
+      }}
+    >
       <Flex align="center">
         <Typography.Title level={3} style={{ paddingRight: "10px" }}>
           Cable <br />

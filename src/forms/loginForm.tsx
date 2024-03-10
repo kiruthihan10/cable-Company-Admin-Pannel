@@ -16,7 +16,7 @@ const LoginForm = () => {
       <Flex
         justify={"center"}
         align={"center"}
-        style={{ height: `${windowHeight}px` }}
+        style={{ height: `${windowHeight*0.8}px` }}
       >
         <Card title="Login" style={{ width: 300 }}>
           <Flex vertical gap="small" style={{ width: "100%" }}>
