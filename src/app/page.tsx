@@ -1,7 +1,6 @@
 "use client";
 
 import { Formik } from "formik";
-import styles from "./page.module.css";
 import * as Yup from "yup";
 import LoginForm from "@/forms/loginForm";
 import { ILoginRequest } from "@/external/service";
@@ -14,7 +13,6 @@ import { useEffect } from "react";
 import { urls } from "@/constants";
 
 export default function Login() {
-  const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const setUserType = useUserStore((state) => state.setUserType);
   const setToken = useUserStore((state) => state.setToken);
@@ -24,7 +22,7 @@ export default function Login() {
     mutationKey: [MutateConstants.login],
     mutationFn: MutateLogin,
     onSuccess(data, _variables, _context) {
-      setUserType(data.userType);
+      setUserType(data.role);
       setToken(data.token);
       router.push(urls.home);
     },

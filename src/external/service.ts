@@ -9,7 +9,7 @@ export interface ILoginRequest {
 
 interface ILoginResponse {
   token: string;
-  userType: userType;
+  role: userType;
 }
 
 interface ISingleCompanyResponse {
