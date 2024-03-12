@@ -13,11 +13,11 @@ import { useEffect, useState } from "react";
 const Companies = () => {
   const user = useUserStore((state) => state.user);
   const router = useRouter();
-    useEffect(() => {
-      if (user?.userType != "Internal") {
-        router.push("home");
-      }
-    });
+  useEffect(() => {
+    if (user?.userType != "Internal") {
+      router.push("home");
+    }
+  });
   console.log(user);
   const setHeader = useSystemStore((state) => state.setHeader);
   useEffect(() => {
@@ -25,12 +25,16 @@ const Companies = () => {
   });
   const { getCompanies } = useAPIController();
   const [pageNumber, setPageNumber] = useState(1);
+  const [size, setSize] = useState<number | undefined>(undefined);
   const [companies, setCompanies] = useState<ISingleCompanyResponse[]>([]);
   const { data, isLoading } = useQuery({
     queryFn: ({ queryKey }) => {
-      return getCompanies(Number(queryKey[1]), undefined);
+      return getCompanies(
+        Number(queryKey[1]),
+        queryKey[2] === undefined ? undefined : Number(queryKey[2])
+      );
     },
-    queryKey: [queryKeys.companies, pageNumber],
+    queryKey: [queryKeys.companies, pageNumber, size],
   });
   useEffect(() => {
     setCompanies(data?.data.companies || []);
@@ -40,11 +44,6 @@ const Companies = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-    },
-    {
-      title: "Id",
-      dataIndex: "id",
-      key: "id",
     },
     {
       title: "Contact Number",
@@ -77,6 +76,11 @@ const Companies = () => {
       key: "totalAreas",
     },
   ];
+
+  const paginationChange = (page: number, pageSize: number) => {
+    setPageNumber(page);
+    setSize(pageSize);
+  };
   return (
     <>
       <Table
@@ -86,6 +90,7 @@ const Companies = () => {
         pagination={{
           defaultCurrent: pageNumber,
           total: data?.data.noOfCompanies,
+          onChange: paginationChange,
         }}
       />
     </>
