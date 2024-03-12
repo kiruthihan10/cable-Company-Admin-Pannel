@@ -4,13 +4,13 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import LoginForm from "@/forms/loginForm";
 import { ILoginRequest } from "@/external/service";
-import { useMutation } from "react-query";
 import { MutateConstants, MutateLogin } from "@/external/mutation";
 import { useUserStore } from "@/stores/userStore";
 import { useSystemStore } from "@/stores/systemStore";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { urls } from "@/constants";
+import { useMutation } from "@tanstack/react-query";
 
 export default function Login() {
   const setUser = useUserStore((state) => state.setUser);

@@ -5,10 +5,10 @@ import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useUserStore } from "@/stores/userStore";
+import { useQuery } from "@tanstack/react-query";
 import { Table } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 
 const Companies = () => {
   const user = useUserStore((state) => state.user);
@@ -26,7 +26,6 @@ const Companies = () => {
   const { getCompanies } = useAPIController();
   const [pageNumber, setPageNumber] = useState(1);
   const [companies, setCompanies] = useState<ISingleCompanyResponse[]>([]);
-
   const { data, isLoading } = useQuery({
     queryFn: ({ queryKey }) => {
       return getCompanies(Number(queryKey[1]), undefined);
