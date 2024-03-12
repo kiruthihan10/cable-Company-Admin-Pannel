@@ -139,7 +139,15 @@ const Navbar = (props: INavbar) => {
   return (
     <div>
       {menuComponent}
-      {children}
+      <div
+        style={{
+          position: "absolute",
+          top: 150,
+          left: 300,
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { userType } from "@/interfaces/user";
 import { useUserStore } from "@/stores/userStore";
 import axios, { AxiosError } from "axios";
 import { ICompaniesResponse } from "./interfaces/companyInterfaces";
+import { useEffect } from "react";
 
 export interface ILoginRequest {
   username: string;
@@ -12,8 +13,6 @@ interface ILoginResponse {
   token: string;
   role: userType;
 }
-
-
 
 const baseURL =
   process.env.NODE_ENV === "production"
@@ -31,7 +30,11 @@ export const login = (req: ILoginRequest) => {
 export const useAPIController = () => {
   const user = useUserStore((state) => state.user);
   const setToken = useUserStore((state) => state.setToken);
-  axios.defaults.headers["Authorization"] = "Bearer " + user?.token;
+  console.log(user)
+  axios.defaults.headers["Authorization"] =
+    user?.token != undefined ? "Bearer " + user?.token : null;
+  console.log(axios.defaults.headers["Authorization"])
+
   const get = <T>(url: string, params?: unknown) => {
     return axios
       .get<T>(baseURL + url, { params: params })
