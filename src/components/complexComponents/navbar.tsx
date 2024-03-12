@@ -121,7 +121,6 @@ const Navbar = (props: INavbar) => {
           height: windowHeight - 100,
         }}
         onClick={(key) => {
-          console.log(key.key);
           switch (key.key) {
             case "home":
               router.push("home");

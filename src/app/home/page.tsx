@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const Home = () => {
   const setHeader = useSystemStore((state) => state.setHeader);
   useEffect(() => {
-    setHeader("Companies");
+    setHeader("Home");
   });
   return <></>;
 };

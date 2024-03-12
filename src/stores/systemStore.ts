@@ -7,6 +7,7 @@ export type header =
   | "Customers"
   | "Payments"
   | "Companies"
+  | "Home"
   | "Areas";
 
 interface ISystemStoreState {
