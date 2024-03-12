@@ -15,6 +15,7 @@ import {
 } from "@mdi/js";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface INavbar {
   children: React.ReactNode;
@@ -40,6 +41,7 @@ function getItem(
 
 const Navbar = (props: INavbar) => {
   const { children } = props;
+  const router = useRouter();
   const user = useUserStore((state) => state.user);
   const [items, setItems] = useState<MenuItem[]>();
   const [windowHeight, setWindowHeight] = useState(0);
@@ -55,31 +57,41 @@ const Navbar = (props: INavbar) => {
       getItem("Logout", "logout", <Icon path={mdiLogout} size={1} />),
     ];
     const superAdminItems: MenuItem[] = [
-      getItem("Company", "sub1", <Icon path={mdiDomain} size={1} />, [
-        getItem("Companies", "1"),
-        getItem("Add Company", "2"),
+      getItem("Company", "company", <Icon path={mdiDomain} size={1} />, [
+        getItem("Companies", "companies"),
+        getItem("Add Company", "addCompanies"),
       ]),
-      getItem("Employee", "sub2", <Icon path={mdiAccountHardHat} size={1} />, [
-        getItem("Employees", "3"),
-        getItem("Add Employee", "4"),
-      ]),
+      getItem(
+        "Employee",
+        "employee",
+        <Icon path={mdiAccountHardHat} size={1} />,
+        [
+          getItem("Employees", "employees"),
+          getItem("Add Employee", "addEmployee"),
+        ]
+      ),
     ];
     const AdminItems: MenuItem[] = [
-      getItem("Customer", "sub1", <Icon path={mdiAccount} size={1} />, [
-        getItem("Customers", "1"),
-        getItem("Add Customer", "2"),
+      getItem("Customer", "customer", <Icon path={mdiAccount} size={1} />, [
+        getItem("Customers", "customers"),
+        getItem("Add Customer", "addCustomers"),
       ]),
-      getItem("Employee", "sub2", <Icon path={mdiAccountHardHat} size={1} />, [
-        getItem("Employees", "3"),
-        getItem("Add Employee", "4"),
+      getItem(
+        "Employee",
+        "employee",
+        <Icon path={mdiAccountHardHat} size={1} />,
+        [
+          getItem("Employees", "employees"),
+          getItem("Add Employee", "addEmployee"),
+        ]
+      ),
+      getItem("Area", "area", <Icon path={mdiSignDirection} size={1} />, [
+        getItem("Areas", "areas"),
+        getItem("Add Area", "addArea"),
       ]),
-      getItem("Area", "sub3", <Icon path={mdiSignDirection} size={1} />, [
-        getItem("Areas", "5"),
-        getItem("Add Area", "6"),
-      ]),
-      getItem("Payment", "sub4", <Icon path={mdiCash} size={1} />, [
-        getItem("Payments", "7"),
-        getItem("Add Payments", "8"),
+      getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
+        getItem("Payments", "payments"),
+        getItem("Add Payments", "addPayment"),
       ]),
     ];
     const addCommonItems = (newItems: MenuItem[]) => {
@@ -108,10 +120,23 @@ const Navbar = (props: INavbar) => {
         style={{
           height: windowHeight - 100,
         }}
+        onClick={(key) => {
+          console.log(key.key);
+          switch (key.key) {
+            case "home":
+              router.push("home");
+              break;
+            case "customers":
+              router.push("customer");
+              break;
+            case "companies":
+              router.push("company");
+              break;
+          }
+        }}
       />
     </div>
   ) : null;
-  console.log(user);
   return (
     <div>
       {menuComponent}
