@@ -1,6 +1,7 @@
 import { userType } from "@/interfaces/user";
 import { useUserStore } from "@/stores/userStore";
 import axios, { AxiosError } from "axios";
+import { ICompaniesResponse } from "./interfaces/companyInterfaces";
 
 export interface ILoginRequest {
   username: string;
@@ -12,21 +13,7 @@ interface ILoginResponse {
   role: userType;
 }
 
-interface ISingleCompanyResponse {
-  id: number;
-  name: string;
-  contactNumber: number;
-  contactPerson: string;
-  totalCustomers: number;
-  totalEmployees: number;
-  totalPayments: number;
-  totalAreas: number;
-}
 
-interface ICompaniesResponse {
-  companies: ISingleCompanyResponse[];
-  noOfCompanies: number;
-}
 
 const baseURL =
   process.env.NODE_ENV === "production"
