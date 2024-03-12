@@ -13,11 +13,11 @@ import { useEffect, useState } from "react";
 const Companies = () => {
   const user = useUserStore((state) => state.user);
   const router = useRouter();
-  //   useEffect(() => {
-  //     if (user?.userType != "Internal") {
-  //       router.push("home");
-  //     }
-  //   });
+    useEffect(() => {
+      if (user?.userType != "Internal") {
+        router.push("home");
+      }
+    });
   console.log(user);
   const setHeader = useSystemStore((state) => state.setHeader);
   useEffect(() => {
