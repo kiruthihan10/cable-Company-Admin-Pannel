@@ -3,12 +3,13 @@
 import { Button, Flex } from "antd";
 import { useFormikContext } from "formik";
 
-interface IAppButton {
+export interface IAppButton {
   text: string;
   center?: boolean;
   formik?: boolean;
   isSubmit?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const AppButton = (props: IAppButton) => {
@@ -16,10 +17,9 @@ const AppButton = (props: IAppButton) => {
     text,
     isSubmit = false,
     center = false,
-    formik = false,
+    disabled = false,
     onClick,
   } = props;
-  const { dirty, isValid } = useFormikContext();
   return (
     <Flex
       justify={center ? "center" : "normal"}
@@ -27,7 +27,7 @@ const AppButton = (props: IAppButton) => {
     >
       <Button
         type="primary"
-        disabled={formik ? !(isValid && dirty) : false}
+        disabled={disabled}
         onClick={onClick}
         htmlType={isSubmit ? "submit" : "button"}
       >

@@ -16,6 +16,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { urls } from "@/constants";
 
 interface INavbar {
   children: React.ReactNode;
@@ -123,14 +124,16 @@ const Navbar = (props: INavbar) => {
         onClick={(key) => {
           switch (key.key) {
             case "home":
-              router.push("home");
+              router.push(`/${urls.home}`);
               break;
             case "customers":
               router.push("customer");
               break;
             case "companies":
-              router.push("company");
+              router.push(`/${urls.company}`);
               break;
+            case "addCompanies":
+              router.push(`/${urls.company}/${urls.add}`);
           }
         }}
       />
@@ -142,7 +145,7 @@ const Navbar = (props: INavbar) => {
       <div
         style={{
           position: "absolute",
-          top: 150,
+          top: 180,
           left: 300,
         }}
       >

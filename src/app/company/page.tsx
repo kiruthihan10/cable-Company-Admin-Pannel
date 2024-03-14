@@ -1,12 +1,14 @@
 "use client";
 
+import AppButton from "@/components/unitComponents/button";
+import { urls } from "@/constants";
 import { ISingleCompanyResponse } from "@/external/interfaces/companyInterfaces";
 import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useUserStore } from "@/stores/userStore";
 import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { Divider, Table } from "antd";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -81,8 +83,17 @@ const Companies = () => {
     setPageNumber(page);
     setSize(pageSize);
   };
+
+  const addNewCompanyButtonClicked = () => {
+    router.push(`${urls.company}/${urls.add}`);
+  };
   return (
     <>
+      <AppButton
+        text={"Add New Company"}
+        onClick={addNewCompanyButtonClicked}
+      />
+      <Divider />
       <Table
         dataSource={companies}
         columns={columns}

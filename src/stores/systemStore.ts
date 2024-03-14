@@ -7,6 +7,7 @@ export type header =
   | "Customers"
   | "Payments"
   | "Companies"
+  | "Add Companies"
   | "Home"
   | "Areas";
 
