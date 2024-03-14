@@ -8,7 +8,8 @@ import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useUserStore } from "@/stores/userStore";
 import { useQuery } from "@tanstack/react-query";
-import { Divider, Table } from "antd";
+import { Divider, Table, TablePaginationConfig } from "antd";
+import { FilterValue, SorterResult } from "antd/es/table/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,14 +29,16 @@ const Companies = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [size, setSize] = useState<number | undefined>(undefined);
   const [companies, setCompanies] = useState<ISingleCompanyResponse[]>([]);
+  const [sortColumn, setSortColumn] = useState<string | undefined>(undefined);
   const { data, isLoading } = useQuery({
     queryFn: ({ queryKey }) => {
       return getCompanies(
         Number(queryKey[1]),
-        queryKey[2] === undefined ? undefined : Number(queryKey[2])
+        queryKey[2] === undefined ? undefined : Number(queryKey[2]),
+        String(queryKey[3])
       );
     },
-    queryKey: [queryKeys.companies, pageNumber, size],
+    queryKey: [queryKeys.companies, pageNumber, size, sortColumn],
   });
   useEffect(() => {
     setCompanies(data?.data.companies || []);
@@ -45,6 +48,7 @@ const Companies = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      sorter: true,
     },
     {
       title: "Contact Number",
@@ -55,26 +59,31 @@ const Companies = () => {
       title: "Contact Person",
       dataIndex: "contactPerson",
       key: "contactPerson",
+      sorter: true,
     },
     {
       title: "Total Customers",
       dataIndex: "totalCustomers",
       key: "totalCustomers",
+      sorter: true,
     },
     {
       title: "Total Employees",
       dataIndex: "totalEmployees",
       key: "totalEmployees",
+      sorter: true,
     },
     {
       title: "Total Payments",
       dataIndex: "totalPayments",
       key: "totalPayments",
+      sorter: true,
     },
     {
       title: "Total Areas",
       dataIndex: "totalAreas",
       key: "totalAreas",
+      sorter: true,
     },
   ];
 
@@ -85,6 +94,27 @@ const Companies = () => {
 
   const addNewCompanyButtonClicked = () => {
     router.push(`${urls.company}/${urls.add}`);
+  };
+
+  const onTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<ISingleCompanyResponse> | any
+  ) => {
+    // switch (sorter);
+    console.log(sorter.columnKey?.toString());
+    console.log(sorter.order);
+    let sortKey = sorter.columnKey?.toString();
+    if (sortKey === undefined) {
+      sortKey === "name";
+    } else {
+      if (sortKey !== undefined) {
+        if (sorter.order === "descend") {
+          sortKey = `-${sortKey}`;
+        }
+        setSortColumn(sortKey);
+      }
+    }
   };
   return (
     <>
@@ -102,6 +132,7 @@ const Companies = () => {
           total: data?.data.noOfCompanies,
           onChange: paginationChange,
         }}
+        onChange={onTableChange}
       />
     </>
   );

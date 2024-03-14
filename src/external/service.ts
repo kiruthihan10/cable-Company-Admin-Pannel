@@ -60,10 +60,11 @@ export const useAPIController = () => {
       }
     }
   };
-  const getCompanies = (page?: number, size?: number) => {
+  const getCompanies = (page?: number, size?: number, orderBy?: string) => {
     return get<ICompaniesResponse>("/Company", {
       page,
       size,
+      orderBy,
     });
   };
 
