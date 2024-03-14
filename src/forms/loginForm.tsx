@@ -25,7 +25,7 @@ const LoginForm = () => {
           width: `${windowWidth - 250}px`,
         }}
       >
-        <Card title={'Login'} style={{ width: 300 }}>
+        <Card title={"Login"} style={{ width: 300 }}>
           <Flex vertical gap="small" style={{ width: "100%" }}>
             <AppTextInput
               name={"username"}
@@ -36,6 +36,7 @@ const LoginForm = () => {
               name="password"
               placeholder="Password"
               label="Password"
+              isPassword
             />
             <FormButton formik center text={"Login"} isSubmit />
           </Flex>

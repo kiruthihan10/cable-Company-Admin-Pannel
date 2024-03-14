@@ -20,7 +20,6 @@ const Companies = () => {
       router.push("home");
     }
   });
-  console.log(user);
   const setHeader = useSystemStore((state) => state.setHeader);
   useEffect(() => {
     setHeader("Companies");

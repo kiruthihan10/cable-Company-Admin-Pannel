@@ -1,4 +1,4 @@
-import { InputNumber, Typography } from "antd";
+import { Input, InputNumber, Typography } from "antd";
 import { useField } from "formik";
 const { Text } = Typography;
 
@@ -20,7 +20,7 @@ const AppNumberInput = (props: IAppNumberInput) => {
   return (
     <div style={{ marginLeft: "10px", marginRight: "10px" }}>
       {labelComponent}
-      <InputNumber
+      <Input
         name={name}
         placeholder={placeholder}
         value={value}

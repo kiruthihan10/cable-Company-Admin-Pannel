@@ -1,7 +1,11 @@
 import { userType } from "@/interfaces/user";
 import { useUserStore } from "@/stores/userStore";
 import axios, { AxiosError } from "axios";
-import { ICompaniesResponse } from "./interfaces/companyInterfaces";
+import {
+  IAddCompanyRequest,
+  IAddCompanyResponse,
+  ICompaniesResponse,
+} from "./interfaces/companyInterfaces";
 import { useEffect } from "react";
 
 export interface ILoginRequest {
@@ -30,10 +34,8 @@ export const login = (req: ILoginRequest) => {
 export const useAPIController = () => {
   const user = useUserStore((state) => state.user);
   const setToken = useUserStore((state) => state.setToken);
-  console.log(user)
   axios.defaults.headers["Authorization"] =
     user?.token != undefined ? "Bearer " + user?.token : null;
-  console.log(axios.defaults.headers["Authorization"])
 
   const get = <T>(url: string, params?: unknown) => {
     return axios
@@ -64,7 +66,12 @@ export const useAPIController = () => {
       size,
     });
   };
+
+  const addCompany = (addCompanyRequest: IAddCompanyRequest) => {
+    return post<IAddCompanyResponse>("/Company", addCompanyRequest);
+  };
   return {
     getCompanies,
+    addCompany,
   };
 };

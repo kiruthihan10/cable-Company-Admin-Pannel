@@ -1,10 +1,17 @@
 "use client";
 
 import FormButton from "@/components/unitComponents/formComponents/button";
-import CompnayForm from "@/forms/companyForm";
+import { mutationKeys } from "@/external/keys";
+import { useAPIController } from "@/external/service";
+import CompnayForm, {
+  CompanyFormInitialValues,
+  CompanyFormValidation,
+  ICompanyForm,
+} from "@/forms/companyForm";
 import { useSystemStore } from "@/stores/systemStore";
+import { useMutation } from "@tanstack/react-query";
 import { Card, Flex } from "antd";
-import { Form, Formik, FormikHelpers, FormikValues } from "formik";
+import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 
 const AddCompany = () => {
@@ -20,15 +27,32 @@ const AddCompany = () => {
   useEffect(() => {
     setWidnowWidth(window.innerWidth);
   }, []);
+  const { addCompany } = useAPIController();
+  const { mutate } = useMutation({
+    mutationKey: [mutationKeys.login],
+    mutationFn: addCompany,
+    onSuccess(data, _variables, _context) {},
+    onError(_error) {},
+  });
+  const onsubmit = (values: ICompanyForm) => {
+    mutate({
+      name: values.name,
+      employeeCreateRequest: {
+        password: values.password,
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phoneNumber: parseInt(`7${values.phoneNumber || 0}`),
+      },
+    });
+  };
+
   return (
     <Formik
-      initialValues={{}}
-      onSubmit={function (
-        values: FormikValues,
-        formikHelpers: FormikHelpers<FormikValues>
-      ): void | Promise<any> {
-        throw new Error("Function not implemented.");
-      }}
+      initialValues={CompanyFormInitialValues}
+      validationSchema={CompanyFormValidation}
+      enableReinitialize
+      onSubmit={onsubmit}
     >
       <Flex
         justify={"center"}
@@ -39,7 +63,10 @@ const AddCompany = () => {
         }}
       >
         <Form>
-          <Card title={"Add Company"} style={{ width: `${windowWidth * 0.64}px` }}>
+          <Card
+            title={"Add Company"}
+            style={{ width: `${windowWidth * 0.64}px` }}
+          >
             <Flex vertical gap="small" style={{ width: "100%" }}>
               <CompnayForm />
               <FormButton formik center text={"Add"} isSubmit />
