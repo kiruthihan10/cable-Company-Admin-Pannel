@@ -62,6 +62,12 @@ const Companies = () => {
       sorter: true,
     },
     {
+      title: "Joined Date",
+      dataIndex: "joinedDate",
+      key: "joinedDate",
+      sorter: true,
+    },
+    {
       title: "Total Customers",
       dataIndex: "totalCustomers",
       key: "totalCustomers",

@@ -1,6 +1,7 @@
 export interface ISingleCompanyResponse {
   id: number;
   name: string;
+  joinedDate: string;
   contactNumber: number;
   contactPerson: string;
   totalCustomers: number;
