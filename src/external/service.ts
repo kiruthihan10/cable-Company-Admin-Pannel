@@ -71,8 +71,13 @@ export const useAPIController = () => {
   const addCompany = (addCompanyRequest: IAddCompanyRequest) => {
     return post<IAddCompanyResponse>("/Company", addCompanyRequest);
   };
+
+  const getCompany = (companyID: number) => {
+    return get<IAddCompanyResponse>(`/Company/${companyID}`);
+  };
   return {
     getCompanies,
     addCompany,
+    getCompany,
   };
 };

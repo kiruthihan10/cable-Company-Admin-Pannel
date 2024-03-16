@@ -2,26 +2,35 @@ import AppNumberInput from "@/components/unitComponents/formComponents/numberInp
 import AppTextInput from "@/components/unitComponents/textInput";
 import { Flex } from "antd";
 import * as Yup from "yup";
+import {
+  IPasswordForm,
+  PasswordFormInitialValues,
+  PasswordFormValidation,
+} from "./passwordForm";
 
 export interface IEmployeeForm {
-  password: string;
   email: string;
   firstName: string;
   lastName: string;
   phoneNumber: number | undefined;
 }
 
+export interface IAddEmployeeForm extends IEmployeeForm, IPasswordForm {}
+
 export const EmployeeFormInitialValues: IEmployeeForm = {
-  password: "",
   email: "",
   firstName: "",
   lastName: "",
   phoneNumber: undefined,
 };
 
+export const AddEmployeeFormInitialValues: IAddEmployeeForm = {
+  ...EmployeeFormInitialValues,
+  ...PasswordFormInitialValues,
+};
+
 export const EmployeeFormValidation: Yup.ObjectSchema<IEmployeeForm> =
   Yup.object().shape({
-    password: Yup.string().required(),
     phoneNumber: Yup.number()
       .required()
       .max(79999999, "Invalid Phone No")
@@ -31,15 +40,26 @@ export const EmployeeFormValidation: Yup.ObjectSchema<IEmployeeForm> =
     email: Yup.string().email().required(),
   });
 
-const EmployeeForm = () => {
+export const AddEmployeeFormValidation: Yup.ObjectSchema<IAddEmployeeForm> =
+  EmployeeFormValidation.concat(PasswordFormValidation);
+
+interface IEmployeeFormProps {
+  addEmployee?: boolean;
+}
+
+const EmployeeForm = (props: IEmployeeFormProps) => {
+  const { addEmployee = true } = props;
+  const passwordField = addEmployee ? (
+    <AppTextInput
+      name="password"
+      placeholder="Password"
+      label="Password"
+      isPassword
+    />
+  ) : null;
   return (
     <>
-      <AppTextInput
-        name="password"
-        placeholder="Password"
-        label="Password"
-        isPassword
-      />
+      {passwordField}
       <Flex justify={"space-between"}>
         <div style={{ width: "50%" }}>
           <AppTextInput

@@ -1,12 +1,10 @@
 "use client";
 
 import { Button, Flex } from "antd";
-import { useFormikContext } from "formik";
 
 export interface IAppButton {
   text: string;
   center?: boolean;
-  formik?: boolean;
   isSubmit?: boolean;
   onClick?: () => void;
   disabled?: boolean;
