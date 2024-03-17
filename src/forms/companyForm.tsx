@@ -39,10 +39,12 @@ export const AddCompanyFormValidation: Yup.ObjectSchema<IAddCompanyForm> =
 
 interface ICompanyFormProps {
   add?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 const CompanyForm = (props: ICompanyFormProps) => {
-  const { add = true } = props;
+  const { add = true, disabled = false, readonly } = props;
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWidnowWidth] = useState(0);
   const { values } = useFormikContext<ICompanyForm>();
@@ -72,11 +74,19 @@ const CompanyForm = (props: ICompanyFormProps) => {
                 name="name"
                 placeholder="Company Name"
                 label="Company Name"
+                disabled={disabled}
+                readonly={readonly}
               />
               <Divider />
               <Typography.Title level={4}>Contact Person</Typography.Title>
-              <EmployeeForm addEmployee={add} />
-              <FormButton center text={add ? "Add" : "Update"} isSubmit />
+              <EmployeeForm
+                addEmployee={add}
+                disabled={disabled}
+                readonly={readonly}
+              />
+              {disabled || readonly ? null : (
+                <FormButton center text={add ? "Add" : "Update"} isSubmit />
+              )}
             </Flex>
           </Card>
         </Form>

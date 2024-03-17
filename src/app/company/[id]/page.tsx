@@ -51,7 +51,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
       enableReinitialize
       onSubmit={onSubmit}
     >
-      <CompanyForm add={false} />
+      <CompanyForm add={false} readonly />
     </Formik>
   );
 };

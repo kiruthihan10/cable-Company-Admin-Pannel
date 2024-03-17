@@ -8,10 +8,20 @@ interface IAppNumberInput {
   label?: string;
   max?: number;
   addonBefore?: string;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 const AppNumberInput = (props: IAppNumberInput) => {
-  const { name, placeholder, label, max, addonBefore } = props;
+  const {
+    name,
+    placeholder,
+    label,
+    max,
+    addonBefore,
+    disabled = false,
+    readonly = false,
+  } = props;
   const [{ value, onChange }, { error }, {}] = useField(name);
 
   const labelComponent = label ? (
@@ -31,6 +41,8 @@ const AppNumberInput = (props: IAppNumberInput) => {
         max={max}
         type="number"
         addonBefore={addonBefore}
+        disabled={disabled}
+        readOnly={readonly}
       />
       <Text type="danger">{error}</Text>
     </div>

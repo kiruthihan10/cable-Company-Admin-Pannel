@@ -9,10 +9,19 @@ interface IAppTextInput {
   placeholder?: string;
   label?: string;
   isPassword?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 const AppTextInput = (props: IAppTextInput) => {
-  const { name, placeholder, label, isPassword = false } = props;
+  const {
+    name,
+    placeholder,
+    label,
+    isPassword = false,
+    disabled = false,
+    readonly = false,
+  } = props;
   const [{ value, onChange }, { error }, {}] = useField(name);
 
   const labelComponent = label ? (
@@ -24,6 +33,8 @@ const AppTextInput = (props: IAppTextInput) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      disabled={disabled}
+      readOnly={readonly}
     />
   ) : (
     <Input
@@ -31,6 +42,8 @@ const AppTextInput = (props: IAppTextInput) => {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      disabled={disabled}
+      readOnly={readonly}
     />
   );
   return (

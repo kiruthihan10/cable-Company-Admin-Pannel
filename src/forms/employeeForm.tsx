@@ -45,16 +45,19 @@ export const AddEmployeeFormValidation: Yup.ObjectSchema<IAddEmployeeForm> =
 
 interface IEmployeeFormProps {
   addEmployee?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 const EmployeeForm = (props: IEmployeeFormProps) => {
-  const { addEmployee = true } = props;
+  const { addEmployee = true, disabled = false, readonly } = props;
   const passwordField = addEmployee ? (
     <AppTextInput
       name="password"
       placeholder="Password"
       label="Password"
       isPassword
+      disabled={disabled}
     />
   ) : null;
   return (
@@ -66,6 +69,8 @@ const EmployeeForm = (props: IEmployeeFormProps) => {
             name="firstName"
             placeholder="FirstName"
             label="FirstName"
+            disabled={disabled}
+            readonly={readonly}
           />
         </div>
         <div style={{ width: "50%" }}>
@@ -73,12 +78,20 @@ const EmployeeForm = (props: IEmployeeFormProps) => {
             name="lastName"
             placeholder="LastName"
             label="LastName"
+            disabled={disabled}
+            readonly={readonly}
           />
         </div>
       </Flex>
       <Flex>
         <div style={{ width: "50%" }}>
-          <AppTextInput name="email" placeholder="Email" label="Email" />
+          <AppTextInput
+            name="email"
+            placeholder="Email"
+            label="Email"
+            disabled={disabled}
+            readonly={readonly}
+          />
         </div>
         <div style={{ width: "50%" }}>
           <AppNumberInput
@@ -86,6 +99,8 @@ const EmployeeForm = (props: IEmployeeFormProps) => {
             placeholder="PhoneNumber"
             label="PhoneNumber"
             addonBefore="07"
+            disabled={disabled}
+            readonly={readonly}
           />
         </div>
       </Flex>
