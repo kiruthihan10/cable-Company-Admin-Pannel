@@ -1,6 +1,6 @@
 "use client";
 
-import { Input, InputNumber, Typography } from "antd";
+import { Input, Typography } from "antd";
 import { useField } from "formik";
 const { Text } = Typography;
 

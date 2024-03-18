@@ -28,6 +28,8 @@ export interface IAddCompanyRequest {
 
 export interface IAddCompanyResponse {
   companyName: string;
+  isActive: boolean;
+  joinedDate: string;
   employees: [
     {
       username: string;

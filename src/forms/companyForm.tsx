@@ -12,9 +12,11 @@ import * as Yup from "yup";
 import FormButton from "@/components/unitComponents/formComponents/button";
 import { useState, useEffect } from "react";
 import { useFormikContext, Form } from "formik";
+import AppSwitch from "@/components/unitComponents/formComponents/switch";
 
 export interface ICompanyForm extends IEmployeeForm {
   name: string;
+  isActive?: boolean;
 }
 
 export interface IAddCompanyForm extends ICompanyForm, IAddEmployeeForm {}
@@ -22,6 +24,7 @@ export interface IAddCompanyForm extends ICompanyForm, IAddEmployeeForm {}
 export const CompanyFormInitialValues: ICompanyForm = {
   ...EmployeeFormInitialValues,
   name: "",
+  isActive: false,
 };
 
 export const AddCompanyFormInitialValues: IAddCompanyForm = {
@@ -32,6 +35,7 @@ export const AddCompanyFormInitialValues: IAddCompanyForm = {
 export const CompanyFormValidation: Yup.ObjectSchema<ICompanyForm> =
   EmployeeFormValidation.shape({
     name: Yup.string().required(),
+    isActive: Yup.bool(),
   });
 
 export const AddCompanyFormValidation: Yup.ObjectSchema<IAddCompanyForm> =
@@ -45,22 +49,45 @@ interface ICompanyFormProps {
 
 const CompanyForm = (props: ICompanyFormProps) => {
   const { add = true, disabled = false, readonly } = props;
-  const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWidnowWidth] = useState(0);
   const { values } = useFormikContext<ICompanyForm>();
   useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
-  useEffect(() => {
     setWidnowWidth(window.innerWidth);
   }, []);
+  const renderNameField = add ? (
+    <AppTextInput
+      name="name"
+      placeholder="Company Name"
+      label="Company Name"
+      disabled={disabled}
+      readonly={readonly}
+    />
+  ) : (
+    <Flex justify={"space-between"}>
+      <div style={{ width: "75%" }}>
+        <AppTextInput
+          name="name"
+          placeholder="Company Name"
+          label="Company Name"
+          disabled={disabled}
+          readonly={readonly}
+        />
+      </div>
+      <Flex style={{ width: "25%" }} justify={"center"} align={"center"}>
+        <AppSwitch
+          name="isActive"
+          checkedChildren="Active"
+          uncheckedChildren="Inactive"
+          label="Company Status"
+        />
+      </Flex>
+    </Flex>
+  );
   return (
     <>
       <Flex
         justify={"center"}
-        align={"center"}
         style={{
-          height: `${windowHeight * 0.8}px`,
           width: `${windowWidth * 0.8}px`,
         }}
       >
@@ -70,13 +97,7 @@ const CompanyForm = (props: ICompanyFormProps) => {
             style={{ width: `${windowWidth * 0.64}px` }}
           >
             <Flex vertical gap="small" style={{ width: "100%" }}>
-              <AppTextInput
-                name="name"
-                placeholder="Company Name"
-                label="Company Name"
-                disabled={disabled}
-                readonly={readonly}
-              />
+              {renderNameField}
               <Divider />
               <Typography.Title level={4}>Contact Person</Typography.Title>
               <EmployeeForm

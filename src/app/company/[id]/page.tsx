@@ -44,6 +44,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
               firstName: data.data.contactPerson.firstName,
               lastName: data.data.contactPerson.lastName,
               phoneNumber: data.data.contactPerson.phoneNumber,
+              isActive: data.data.isActive
             }
           : CompanyFormInitialValues
       }

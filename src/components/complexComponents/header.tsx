@@ -1,6 +1,6 @@
 "use client";
 
-import { useSystemStore, header } from "@/stores/systemStore";
+import { useSystemStore } from "@/stores/systemStore";
 import { Divider, Flex, Typography } from "antd";
 
 const Header = () => {
