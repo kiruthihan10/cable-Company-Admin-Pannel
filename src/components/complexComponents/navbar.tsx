@@ -44,6 +44,7 @@ const Navbar = (props: INavbar) => {
   const { children } = props;
   const router = useRouter();
   const user = useUserStore((state) => state.user);
+  const removeUser = useUserStore((state) => state.removeUser);
   const [items, setItems] = useState<MenuItem[]>();
   const [windowHeight, setWindowHeight] = useState(0);
   useEffect(() => {
@@ -134,6 +135,11 @@ const Navbar = (props: INavbar) => {
               break;
             case "addCompanies":
               router.push(`/${urls.company}/${urls.add}`);
+              break;
+            case "logout":
+              removeUser();
+              router.push("/");
+              break;
           }
         }}
       />
