@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Card,
@@ -16,21 +18,44 @@ import AppSwitch from "@/components/unitComponents/formComponents/switch";
 import { DownOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import ViewEmployeeForm from "../employee/viewEmployeeForm";
+import { useMutation } from "@tanstack/react-query";
+import { mutationKeys } from "@/external/keys";
+import { useAPIController } from "@/external/service";
+import { urls } from "@/constants";
 
-const ViewCompanyForm = () => {
+interface IViewCompanyForm {
+  companyID: number;
+}
+
+const ViewCompanyForm = (props: IViewCompanyForm) => {
+  const { companyID } = props;
   const { values } = useFormikContext<ICompanyForm>();
   const [windowWidth, setWidnowWidth] = useState(0);
   useEffect(() => {
     setWidnowWidth(window.innerWidth);
   }, []);
-
+  const { setCompanyActiveStatus } = useAPIController();
+  const { mutate } = useMutation({
+    mutationKey: [
+      mutationKeys.companies,
+      mutationKeys.activeStatus,
+      values.isActive,
+    ],
+    mutationFn: setCompanyActiveStatus,
+    onSuccess(data, _variables, _context) {},
+    onError(_error) {
+      // setShowModal(true);
+    },
+  });
   const router = useRouter();
 
   const moveToEditCompantPage = () => {
-    router.push("edit");
-  };
+    router.push(`/${urls.company}/${companyID}/${urls.edit}`);
+  };  
   const changeContactEmployee = () => {};
-  const switchCompanyStatus = () => {};
+  const switchCompanyStatus = () => {
+    mutate({ companyID: companyID, isActive: !values.isActive || false });
+  };
   const manageCompanyMenuItems: MenuProps["items"] = [
     {
       key: 1,

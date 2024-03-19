@@ -35,6 +35,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
     return <Spin spinning fullscreen />;
   }
   const onSubmit = () => {};
+  console.log(data?.data.companyIsActive,)
   return (
     <Formik
       initialValues={
@@ -45,7 +46,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
               firstName: data.data.contactPerson.firstName,
               lastName: data.data.contactPerson.lastName,
               phoneNumber: data.data.contactPerson.phoneNumber,
-              isActive: data.data.isActive,
+              isActive: data.data.companyIsActive,
             }
           : CompanyFormInitialValues
       }
@@ -53,7 +54,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
       enableReinitialize
       onSubmit={onSubmit}
     >
-      <ViewCompanyForm />
+      <ViewCompanyForm companyID={id} />
     </Formik>
   );
 };

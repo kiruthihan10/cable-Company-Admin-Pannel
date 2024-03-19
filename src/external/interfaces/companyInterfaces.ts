@@ -28,7 +28,7 @@ export interface IAddCompanyRequest {
 
 export interface IAddCompanyResponse {
   companyName: string;
-  isActive: boolean;
+  companyIsActive: boolean;
   joinedDate: string;
   employees: [
     {
@@ -55,4 +55,9 @@ export interface IAddCompanyResponse {
     lastName: string;
     phoneNumber: number;
   };
+}
+
+export interface IUpdateCompanyActiveState {
+  companyID: number;
+  isActive: boolean;
 }

@@ -38,7 +38,7 @@ const LoginForm = () => {
               label="Password"
               isPassword
             />
-            <FormButton formik center text={"Login"} isSubmit />
+            <FormButton center text={"Login"} isSubmit />
           </Flex>
         </Card>
       </Flex>

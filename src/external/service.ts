@@ -5,6 +5,7 @@ import {
   IAddCompanyRequest,
   IAddCompanyResponse,
   ICompaniesResponse,
+  IUpdateCompanyActiveState,
 } from "./interfaces/companyInterfaces";
 import { useEffect } from "react";
 
@@ -76,8 +77,11 @@ export const useAPIController = () => {
     return get<IAddCompanyResponse>(`/Company/${companyID}`);
   };
 
-  const setCompanyActiveStatus = (companyID: number) => {
-    return post<IAddCompanyResponse>(`/Company/${companyID}/isActive`);
+  const setCompanyActiveStatus = (request: IUpdateCompanyActiveState) => {
+    const { companyID, isActive } = request;
+    return post<IAddCompanyResponse>(`/Company/${companyID}/isActive`, {
+      isActive: isActive,
+    });
   };
   return {
     getCompanies,
