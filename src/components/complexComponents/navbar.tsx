@@ -140,6 +140,9 @@ const Navbar = (props: INavbar) => {
               removeUser();
               router.push("/");
               break;
+            case "employees":
+              router.push(`/${urls.employee}`);
+              break;
           }
         }}
       />
