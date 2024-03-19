@@ -2,10 +2,11 @@
 
 import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
-import CompanyForm, {
+import ViewCompanyForm from "@/forms/company/viewCompanyForm";
+import {
   CompanyFormInitialValues,
   CompanyFormValidation,
-} from "@/forms/companyForm";
+} from "@/forms/company/companyForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
 import { Spin } from "antd";
@@ -44,7 +45,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
               firstName: data.data.contactPerson.firstName,
               lastName: data.data.contactPerson.lastName,
               phoneNumber: data.data.contactPerson.phoneNumber,
-              isActive: data.data.isActive
+              isActive: data.data.isActive,
             }
           : CompanyFormInitialValues
       }
@@ -52,7 +53,7 @@ const CompanyPage = (props: ICompanyPageProps) => {
       enableReinitialize
       onSubmit={onSubmit}
     >
-      <CompanyForm add={false} readonly />
+      <ViewCompanyForm />
     </Formik>
   );
 };

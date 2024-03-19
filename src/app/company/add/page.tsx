@@ -2,11 +2,12 @@
 
 import { mutationKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
-import CompanyForm, {
+import AddCompanyForm from "@/forms/company/addCompanyForm";
+import {
   AddCompanyFormInitialValues,
   AddCompanyFormValidation,
   IAddCompanyForm,
-} from "@/forms/companyForm";
+} from "@/forms/company/companyForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation } from "@tanstack/react-query";
 import { Formik } from "formik";
@@ -44,7 +45,7 @@ const AddCompany = () => {
       enableReinitialize
       onSubmit={onsubmit}
     >
-      <CompanyForm />
+      <AddCompanyForm />
     </Formik>
   );
 };

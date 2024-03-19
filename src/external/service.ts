@@ -75,9 +75,14 @@ export const useAPIController = () => {
   const getCompany = (companyID: number) => {
     return get<IAddCompanyResponse>(`/Company/${companyID}`);
   };
+
+  const setCompanyActiveStatus = (companyID: number) => {
+    return post<IAddCompanyResponse>(`/Company/${companyID}/isActive`);
+  };
   return {
     getCompanies,
     addCompany,
     getCompany,
+    setCompanyActiveStatus,
   };
 };
