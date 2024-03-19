@@ -7,12 +7,15 @@ import EmployeeForm, {
   IAddEmployeeForm,
   IEmployeeForm,
 } from "./employeeForm";
-import { Card, Divider, Flex, Typography } from "antd";
+import { Button, Card, Divider, Dropdown, Flex, Space, Typography } from "antd";
 import * as Yup from "yup";
 import FormButton from "@/components/unitComponents/formComponents/button";
 import { useState, useEffect } from "react";
 import { useFormikContext, Form } from "formik";
 import AppSwitch from "@/components/unitComponents/formComponents/switch";
+import type { MenuProps } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 export interface ICompanyForm extends IEmployeeForm {
   name: string;
@@ -54,6 +57,34 @@ const CompanyForm = (props: ICompanyFormProps) => {
   useEffect(() => {
     setWidnowWidth(window.innerWidth);
   }, []);
+  const router = useRouter();
+  const moveToEditCompantPage = () => {
+    router.push("edit");
+  };
+  const changeContactEmployee = () => {};
+  const switchCompanyStatus = () => {};
+  const manageCompanyMenuItems: MenuProps["items"] = [
+    {
+      key: 1,
+      label: "Edit Company Info",
+      onClick: moveToEditCompantPage,
+    },
+    {
+      key: 2,
+      label: "Change Contact Employee",
+      onClick: changeContactEmployee,
+    },
+    {
+      key: 3,
+      label: values.isActive ? "Deactive company" : "Activate Company",
+      danger: values.isActive ? true : false,
+      onClick: switchCompanyStatus,
+    },
+  ];
+  const manageCompanyMenuProps = {
+    items: manageCompanyMenuItems,
+  };
+
   const renderNameField = add ? (
     <AppTextInput
       name="name"
@@ -64,7 +95,7 @@ const CompanyForm = (props: ICompanyFormProps) => {
     />
   ) : (
     <Flex justify={"space-between"}>
-      <div style={{ width: "75%" }}>
+      <div style={{ width: "50%" }}>
         <AppTextInput
           name="name"
           placeholder="Company Name"
@@ -79,7 +110,18 @@ const CompanyForm = (props: ICompanyFormProps) => {
           checkedChildren="Active"
           uncheckedChildren="Inactive"
           label="Company Status"
+          disabled={disabled || readonly}
         />
+      </Flex>
+      <Flex style={{ width: "25%" }} justify={"center"} align={"end"}>
+        <Dropdown menu={manageCompanyMenuProps}>
+          <Button>
+            <Space>
+              Manage Company
+              <DownOutlined />
+            </Space>
+          </Button>
+        </Dropdown>
       </Flex>
     </Flex>
   );

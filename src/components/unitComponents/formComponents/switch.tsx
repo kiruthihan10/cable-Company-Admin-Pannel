@@ -8,13 +8,13 @@ const { Text } = Typography;
 interface IAppSwitch {
   name: string;
   label?: string;
-  readonly?: boolean;
+  disabled?: boolean;
   checkedChildren?: ReactNode;
   uncheckedChildren?: ReactNode;
 }
 
 const AppSwitch = (props: IAppSwitch) => {
-  const { name, label, readonly, checkedChildren, uncheckedChildren } = props;
+  const { name, label, disabled, checkedChildren, uncheckedChildren } = props;
   const [{ value, onChange }, { error }, {}] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
@@ -27,6 +27,7 @@ const AppSwitch = (props: IAppSwitch) => {
         unCheckedChildren={uncheckedChildren}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
       <Text type="danger">{error}</Text>
     </div>
