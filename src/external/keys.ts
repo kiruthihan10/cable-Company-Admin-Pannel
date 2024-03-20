@@ -1,5 +1,6 @@
 export const queryKeys = {
   companies: "companies",
+  employees: "employees",
 };
 
 export const mutationKeys = {

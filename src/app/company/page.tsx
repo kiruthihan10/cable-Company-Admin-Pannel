@@ -108,8 +108,6 @@ const Companies = () => {
     sorter: SorterResult<ISingleCompanyResponse> | any
   ) => {
     // switch (sorter);
-    console.log(sorter.columnKey?.toString());
-    console.log(sorter.order);
     let sortKey = sorter.columnKey?.toString();
     if (sortKey === undefined) {
       sortKey === "name";
