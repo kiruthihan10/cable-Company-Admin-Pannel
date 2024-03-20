@@ -120,6 +120,10 @@ const Companies = () => {
       }
     }
   };
+
+  const generateRowKey = (record: ISingleCompanyResponse) => {
+    return record.id;
+  };
   return (
     <>
       <AppButton
@@ -137,6 +141,7 @@ const Companies = () => {
           onChange: paginationChange,
         }}
         onChange={onTableChange}
+        rowKey={generateRowKey}
       />
     </>
   );

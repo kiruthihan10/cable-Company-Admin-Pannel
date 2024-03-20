@@ -123,6 +123,10 @@ const Employees = () => {
     }
   };
 
+  const generateRowKey = (record: ISingleEmployeeResponse) => {
+    return record.username;
+  };
+
   const addNewEmployee = () => {};
   return (
     <>
@@ -138,6 +142,7 @@ const Employees = () => {
           onChange: paginationChange,
         }}
         onChange={onTableChange}
+        rowKey={generateRowKey}
       />
     </>
   );
