@@ -30,12 +30,12 @@ export default function RootLayout({
           },
         }}
       >
-        <Providers>
-          <body>
+        <body>
+          <Providers>
             <Header />
             <Navbar>{children}</Navbar>
-          </body>
-        </Providers>
+          </Providers>
+        </body>
       </ConfigProvider>
     </html>
   );
