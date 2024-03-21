@@ -25,7 +25,7 @@ const AddCompany = () => {
     onSuccess(data, _variables, _context) {},
     onError(_error) {},
   });
-  const onsubmit = (values: IAddCompanyForm) => {
+  const onSubmit = (values: IAddCompanyForm) => {
     mutate({
       name: values.name,
       employeeCreateRequest: {
@@ -43,7 +43,7 @@ const AddCompany = () => {
       initialValues={AddCompanyFormInitialValues}
       validationSchema={AddCompanyFormValidation}
       enableReinitialize
-      onSubmit={onsubmit}
+      onSubmit={onSubmit}
     >
       <AddCompanyForm />
     </Formik>

@@ -96,7 +96,7 @@ export const useAPIController = () => {
       orderBy,
     });
   };
-  const AddEmployee = (addEmployeeRequest: IAddEmployeeRequest) => {
+  const addEmployee = (addEmployeeRequest: IAddEmployeeRequest) => {
     return post<IEmployeeResponse>("/Employee", addEmployeeRequest);
   };
   return {
@@ -105,6 +105,6 @@ export const useAPIController = () => {
     getCompany,
     setCompanyActiveStatus,
     getEmployees,
-    AddEmployee,
+    addEmployee,
   };
 };

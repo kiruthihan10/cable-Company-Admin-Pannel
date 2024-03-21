@@ -3,7 +3,7 @@ import { Form } from "formik";
 import FormButton from "@/components/unitComponents/formComponents/button";
 import { useEffect, useState } from "react";
 import AppTextInput from "@/components/unitComponents/textInput";
-import AddEmployeeForm from "../employee/addEmployeeForm";
+import AddFirstTimeEmployeeForm from "../employee/addFirstEmployeeForm";
 
 const AddCompanyForm = () => {
   const [windowWidth, setWidnowWidth] = useState(0);
@@ -31,7 +31,7 @@ const AddCompanyForm = () => {
               />
               <Divider />
               <Typography.Title level={4}>Contact Person</Typography.Title>
-              <AddEmployeeForm />
+              <AddFirstTimeEmployeeForm />
               <FormButton center text="Add" isSubmit />
             </Flex>
           </Card>

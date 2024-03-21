@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 export type header =
   | "Login"
   | "Employees"
+  | "Add Employee"
   | "Customers"
   | "Payments"
   | "Companies"

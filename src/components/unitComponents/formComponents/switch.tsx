@@ -15,10 +15,13 @@ interface IAppSwitch {
 
 const AppSwitch = (props: IAppSwitch) => {
   const { name, label, disabled, checkedChildren, uncheckedChildren } = props;
-  const [{ value, onChange }, { error }, {}] = useField(name);
+  const [{ value, onChange }, { error }, { setValue }] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
   ) : null;
+  const onValChange = (checked: boolean) => {
+    onChange(setValue(checked));
+  };
   return (
     <div style={{ marginLeft: "10px", marginRight: "10px" }}>
       {labelComponent}
@@ -26,7 +29,7 @@ const AppSwitch = (props: IAppSwitch) => {
         checkedChildren={checkedChildren}
         unCheckedChildren={uncheckedChildren}
         value={value}
-        onChange={onChange}
+        onChange={onValChange}
         disabled={disabled}
       />
       <Text type="danger">{error}</Text>

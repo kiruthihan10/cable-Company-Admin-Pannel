@@ -12,7 +12,9 @@ export interface IEmployeeForm {
   phoneNumber: number | undefined;
 }
 
-export interface IAddEmployeeForm extends IEmployeeForm, IPasswordForm {}
+export interface IAddEmployeeForm extends IEmployeeForm, IPasswordForm {
+  isAdmin: boolean;
+}
 
 export const EmployeeFormInitialValues: IEmployeeForm = {
   email: "",
@@ -24,6 +26,7 @@ export const EmployeeFormInitialValues: IEmployeeForm = {
 export const AddEmployeeFormInitialValues: IAddEmployeeForm = {
   ...EmployeeFormInitialValues,
   ...PasswordFormInitialValues,
+  isAdmin: false,
 };
 
 export const EmployeeFormValidation: Yup.ObjectSchema<IEmployeeForm> =
@@ -38,4 +41,6 @@ export const EmployeeFormValidation: Yup.ObjectSchema<IEmployeeForm> =
   });
 
 export const AddEmployeeFormValidation: Yup.ObjectSchema<IAddEmployeeForm> =
-  EmployeeFormValidation.concat(PasswordFormValidation);
+  EmployeeFormValidation.concat(PasswordFormValidation).shape({
+    isAdmin: Yup.bool().required(),
+  });
