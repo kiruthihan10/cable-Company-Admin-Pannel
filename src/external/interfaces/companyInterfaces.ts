@@ -1,3 +1,5 @@
+import { IAddFirstEmployeeRequest } from "./employeeInterfaces";
+
 export interface ISingleCompanyResponse {
   id: number;
   name: string;
@@ -17,13 +19,7 @@ export interface ICompaniesResponse {
 
 export interface IAddCompanyRequest {
   name: string;
-  employeeCreateRequest: {
-    password: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: number;
-  };
+  employeeCreateRequest: IAddFirstEmployeeRequest;
 }
 
 export interface IAddCompanyResponse {

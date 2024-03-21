@@ -8,7 +8,11 @@ import {
   IUpdateCompanyActiveState,
 } from "./interfaces/companyInterfaces";
 import { useEffect } from "react";
-import { IEmployeesResponse } from "./interfaces/employeeInterfaces";
+import {
+  IAddEmployeeRequest,
+  IEmployeeResponse,
+  IEmployeesResponse,
+} from "./interfaces/employeeInterfaces";
 
 export interface ILoginRequest {
   username: string;
@@ -92,11 +96,15 @@ export const useAPIController = () => {
       orderBy,
     });
   };
+  const AddEmployee = (addEmployeeRequest: IAddEmployeeRequest) => {
+    return post<IEmployeeResponse>("/Employee", addEmployeeRequest);
+  };
   return {
     getCompanies,
     addCompany,
     getCompany,
     setCompanyActiveStatus,
     getEmployees,
+    AddEmployee,
   };
 };
