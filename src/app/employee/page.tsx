@@ -5,7 +5,7 @@ import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
-import { Divider, Switch, Table, TablePaginationConfig } from "antd";
+import { Divider, Spin, Switch, Table, TablePaginationConfig } from "antd";
 import { useEffect, useState } from "react";
 import { FilterValue, SorterResult } from "antd/es/table/interface";
 import AppButton from "@/components/unitComponents/button";
@@ -108,8 +108,8 @@ const Employees = () => {
     setSize(pageSize);
   };
   const onTableChange = (
-    pagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
+    _pagination: TablePaginationConfig,
+    _filters: Record<string, FilterValue | null>,
     sorter: SorterResult<ISingleEmployeeResponse> | any
   ) => {
     // switch (sorter);
@@ -131,8 +131,9 @@ const Employees = () => {
   };
 
   const addNewEmployee = () => {
-    router.push(`/${urls.employee}/${urls.add}`)
+    router.push(`/${urls.employee}/${urls.add}`);
   };
+  if (isLoading) return <Spin />;
   return (
     <>
       <AppButton text={"Add New Employee"} onClick={addNewEmployee} />

@@ -7,7 +7,6 @@ import {
   ICompaniesResponse,
   IUpdateCompanyActiveState,
 } from "./interfaces/companyInterfaces";
-import { useEffect } from "react";
 import {
   IAddEmployeeRequest,
   IEmployeeResponse,
@@ -47,6 +46,7 @@ export const useAPIController = () => {
     return axios
       .get<T>(baseURL + url, { params: params })
       .catch(async (error: Error | AxiosError) => {
+        console.log(user);
         handleUnAuth(error);
       });
   };
