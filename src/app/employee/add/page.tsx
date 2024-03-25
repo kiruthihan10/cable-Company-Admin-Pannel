@@ -2,6 +2,7 @@
 
 import FormButton from "@/components/unitComponents/formComponents/button";
 import AppTextInput from "@/components/unitComponents/textInput";
+import { urls } from "@/constants";
 import { mutationKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import AddEmployeeForm from "@/forms/employee/addEmployeeForm";
@@ -15,9 +16,11 @@ import { useSystemStore } from "@/stores/systemStore";
 import { useMutation } from "@tanstack/react-query";
 import { Flex, Card, Divider, Typography } from "antd";
 import { Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const AddEmployee = () => {
+  const router = useRouter();
   const setHeader = useSystemStore((state) => state.setHeader);
   useEffect(() => {
     setHeader("Add Employee");
@@ -26,6 +29,9 @@ const AddEmployee = () => {
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.employee],
     mutationFn: addEmployee,
+    onSuccess: () => {
+      router.push(`/${urls.employee}`);
+    },
   });
   const [windowWidth, setWidnowWidth] = useState(0);
   useEffect(() => {
@@ -50,7 +56,7 @@ const AddEmployee = () => {
         >
           <Form>
             <Card
-              title={"Add Company"}
+              title={"Add Employee"}
               style={{ width: `${windowWidth * 0.64}px` }}
             >
               <Flex vertical gap="small" style={{ width: "100%" }}>

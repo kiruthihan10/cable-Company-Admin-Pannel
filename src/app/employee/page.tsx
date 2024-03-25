@@ -10,8 +10,11 @@ import { useEffect, useState } from "react";
 import { FilterValue, SorterResult } from "antd/es/table/interface";
 import AppButton from "@/components/unitComponents/button";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import { urls } from "@/constants";
 
 const Employees = () => {
+  const router = useRouter();
   const setHeader = useSystemStore((state) => state.setHeader);
   const { getEmployees } = useAPIController();
   useEffect(() => {
@@ -127,7 +130,9 @@ const Employees = () => {
     return record.username;
   };
 
-  const addNewEmployee = () => {};
+  const addNewEmployee = () => {
+    router.push(`/${urls.employee}/${urls.add}`)
+  };
   return (
     <>
       <AppButton text={"Add New Employee"} onClick={addNewEmployee} />

@@ -143,6 +143,9 @@ const Navbar = (props: INavbar) => {
             case "employees":
               router.push(`/${urls.employee}`);
               break;
+            case "addEmployee":
+              router.push(`/${urls.employee}/${urls.add}`);
+              break;
           }
         }}
       />
