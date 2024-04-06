@@ -12,6 +12,7 @@ import {
   IEmployeeResponse,
   IEmployeesResponse,
 } from "./interfaces/employeeInterfaces";
+import { ICustomersResponse } from "./interfaces/customerInterface";
 
 export interface ILoginRequest {
   username: string;
@@ -99,6 +100,14 @@ export const useAPIController = () => {
   const addEmployee = (addEmployeeRequest: IAddEmployeeRequest) => {
     return post<IEmployeeResponse>("/Employee", addEmployeeRequest);
   };
+
+  const getCustomers = (page?: number, size?: number, orderBy?: string) => {
+    return get<ICustomersResponse>("/Customer", {
+      page,
+      size,
+      orderBy,
+    });
+  };
   return {
     getCompanies,
     addCompany,
@@ -106,5 +115,6 @@ export const useAPIController = () => {
     setCompanyActiveStatus,
     getEmployees,
     addEmployee,
+    getCustomers,
   };
 };
