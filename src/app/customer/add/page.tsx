@@ -2,46 +2,58 @@
 
 import FormButton from "@/components/unitComponents/formComponents/button";
 import { urls } from "@/constants";
-import { mutationKeys } from "@/external/keys";
+import { mutationKeys, queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
-import AddEmployeeForm from "@/forms/employee/addEmployeeForm";
+import AddCustomerForm from "@/forms/customer/addCustomerForm";
 import {
-  AddEmployeeFormInitialValues,
-  AddEmployeeFormValidation,
-  IAddEmployeeForm,
-} from "@/forms/employee/employeeForm";
+  AddCustomerFormInitialValues,
+  AddCustomerFormValidation,
+  IAddCustomerForm,
+} from "@/forms/customer/customerForm";
 import { useSystemStore } from "@/stores/systemStore";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Flex, Card } from "antd";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const AddEmployee = () => {
+const AddCustomer = () => {
   const router = useRouter();
   const setHeader = useSystemStore((state) => state.setHeader);
+  const { addCustomer, getAreas } = useAPIController();
   useEffect(() => {
-    setHeader("Add Employee");
+    setHeader("Add Customer");
   });
-  const { addEmployee } = useAPIController();
   const { mutate } = useMutation({
-    mutationKey: [mutationKeys.employee],
-    mutationFn: addEmployee,
+    mutationKey: [mutationKeys.customer],
+    mutationFn: addCustomer,
     onSuccess: () => {
-      router.push(`/${urls.employee}`);
+      router.push(`/${urls.customer}`);
     },
   });
-  const [windowWidth, setWidnowWidth] = useState(0);
+  const { data, isLoading } = useQuery({
+    queryFn: getAreas,
+    queryKey: [queryKeys.areas],
+  });
+  const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
-    setWidnowWidth(window.innerWidth);
+    setWindowWidth(window.innerWidth);
   }, []);
-  const onSubmit = (values: IAddEmployeeForm) => {
-    mutate({ ...values, phoneNumber: values.phoneNumber || 0 });
+  const onSubmit = (values: IAddCustomerForm) => {
+    mutate({
+      ...values,
+      phoneNumber: values.phoneNumber || 0,
+      areaID: values.areaID || -1,
+    });
   };
+
   return (
     <Formik
-      initialValues={AddEmployeeFormInitialValues}
-      validationSchema={AddEmployeeFormValidation}
+      initialValues={{
+        ...AddCustomerFormInitialValues,
+        areaID: data?.data.areas[0].id,
+      }}
+      validationSchema={AddCustomerFormValidation}
       enableReinitialize
       onSubmit={onSubmit}
     >
@@ -58,7 +70,7 @@ const AddEmployee = () => {
               style={{ width: `${windowWidth * 0.64}px` }}
             >
               <Flex vertical gap="small" style={{ width: "100%" }}>
-                <AddEmployeeForm />
+                <AddCustomerForm areas={data?.data.areas || []} />
                 <FormButton center text="Add" isSubmit />
               </Flex>
             </Card>
@@ -69,4 +81,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddCustomer;

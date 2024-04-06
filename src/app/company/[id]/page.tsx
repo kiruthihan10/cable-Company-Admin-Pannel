@@ -35,7 +35,6 @@ const CompanyPage = (props: ICompanyPageProps) => {
     return <Spin spinning fullscreen />;
   }
   const onSubmit = () => {};
-  console.log(data?.data.companyIsActive,)
   return (
     <Formik
       initialValues={

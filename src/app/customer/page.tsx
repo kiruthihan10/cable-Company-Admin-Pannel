@@ -11,6 +11,7 @@ import { FilterValue, SorterResult } from "antd/es/table/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import { urls } from "@/constants";
 
 const Customers = () => {
   const router = useRouter();
@@ -153,9 +154,12 @@ const Customers = () => {
   const generateRowKey = (record: ISingleCustomerResponse) => {
     return record.username;
   };
+  const createCustomer = () => {
+    router.push(`/${urls.customer}/${urls.add}`);
+  };
   return (
     <>
-      <AppButton text={"Add New Customer"} />
+      <AppButton text={"Add New Customer"} onClick={createCustomer}/>
       <Divider />
       <Table
         dataSource={customers}

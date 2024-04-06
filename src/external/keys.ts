@@ -2,6 +2,7 @@ export const queryKeys = {
   companies: "companies",
   employees: "employees",
   customers: "customers",
+  areas: "areas",
 };
 
 export const mutationKeys = {
@@ -9,4 +10,5 @@ export const mutationKeys = {
   companies: "companies",
   activeStatus: "activeStatus",
   employee: "employee",
+  customer: "customer",
 };

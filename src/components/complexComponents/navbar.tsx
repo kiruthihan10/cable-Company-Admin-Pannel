@@ -128,8 +128,10 @@ const Navbar = (props: INavbar) => {
               router.push(`/${urls.home}`);
               break;
             case "customers":
-              router.push("customer");
+              router.push(`/${urls.customer}`);
               break;
+            case "addCustomers":
+              router.push(`/${urls.customer}/${urls.add}`);
             case "companies":
               router.push(`/${urls.company}`);
               break;

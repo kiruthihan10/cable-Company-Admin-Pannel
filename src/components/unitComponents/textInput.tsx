@@ -11,6 +11,7 @@ interface IAppTextInput {
   isPassword?: boolean;
   disabled?: boolean;
   readonly?: boolean;
+  isTextArea?: boolean;
 }
 
 const AppTextInput = (props: IAppTextInput) => {
@@ -21,6 +22,7 @@ const AppTextInput = (props: IAppTextInput) => {
     isPassword = false,
     disabled = false,
     readonly = false,
+    isTextArea = false,
   } = props;
   const [{ value, onChange }, { error }, {}] = useField(name);
 
@@ -29,6 +31,15 @@ const AppTextInput = (props: IAppTextInput) => {
   ) : null;
   const inputComponent = isPassword ? (
     <Input.Password
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+      readOnly={readonly}
+    />
+  ) : isTextArea ? (
+    <Input.TextArea
       name={name}
       placeholder={placeholder}
       value={value}

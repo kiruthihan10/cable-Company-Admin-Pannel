@@ -6,6 +6,7 @@ export type header =
   | "Employees"
   | "Add Employee"
   | "Customers"
+  | "Add Customer"
   | "Payments"
   | "Companies"
   | "Add Companies"

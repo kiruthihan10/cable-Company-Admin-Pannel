@@ -12,7 +12,12 @@ import {
   IEmployeeResponse,
   IEmployeesResponse,
 } from "./interfaces/employeeInterfaces";
-import { ICustomersResponse } from "./interfaces/customerInterface";
+import {
+  IAddCustomerRequest,
+  ICustomerResponse,
+  ICustomersResponse,
+} from "./interfaces/customerInterface";
+import { IAreasResponse } from "./interfaces/areaInterface";
 
 export interface ILoginRequest {
   username: string;
@@ -47,7 +52,6 @@ export const useAPIController = () => {
     return axios
       .get<T>(baseURL + url, { params: params })
       .catch(async (error: Error | AxiosError) => {
-        console.log(user);
         handleUnAuth(error);
       });
   };
@@ -108,6 +112,15 @@ export const useAPIController = () => {
       orderBy,
     });
   };
+  const addCustomer = (addCustomerRequest: IAddCustomerRequest) => {
+    return post<ICustomerResponse>("/Customer", {
+      ...addCustomerRequest,
+      connectionStartDate: addCustomerRequest.connectionStartDate.slice(0, 10),
+    });
+  };
+  const getAreas = () => {
+    return get<IAreasResponse>("/Area");
+  };
   return {
     getCompanies,
     addCompany,
@@ -116,5 +129,7 @@ export const useAPIController = () => {
     getEmployees,
     addEmployee,
     getCustomers,
+    addCustomer,
+    getAreas,
   };
 };

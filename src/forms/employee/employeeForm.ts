@@ -4,23 +4,20 @@ import {
   PasswordFormInitialValues,
   PasswordFormValidation,
 } from "../passwordForm";
+import {
+  IUserForm,
+  UserFormInitialValues,
+  UserFormValidation,
+} from "../user/userForm";
 
-export interface IEmployeeForm {
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: number | undefined;
-}
+export interface IEmployeeForm extends IUserForm {}
 
 export interface IAddEmployeeForm extends IEmployeeForm, IPasswordForm {
   isAdmin: boolean;
 }
 
 export const EmployeeFormInitialValues: IEmployeeForm = {
-  email: "",
-  firstName: "",
-  lastName: "",
-  phoneNumber: undefined,
+  ...UserFormInitialValues,
 };
 
 export const AddEmployeeFormInitialValues: IAddEmployeeForm = {
@@ -30,15 +27,7 @@ export const AddEmployeeFormInitialValues: IAddEmployeeForm = {
 };
 
 export const EmployeeFormValidation: Yup.ObjectSchema<IEmployeeForm> =
-  Yup.object().shape({
-    phoneNumber: Yup.number()
-      .required()
-      .max(79999999, "Invalid Phone No")
-      .min(60000000, "Invalid Phone No"),
-    firstName: Yup.string().required("Required").max(50),
-    lastName: Yup.string().required("Required").max(50),
-    email: Yup.string().email().required(),
-  });
+  UserFormValidation.shape({});
 
 export const AddEmployeeFormValidation: Yup.ObjectSchema<IAddEmployeeForm> =
   EmployeeFormValidation.concat(PasswordFormValidation).shape({

@@ -1,4 +1,4 @@
-import { ISingleUserResponse } from "./userInterface";
+import { IAddUserRequest, ISingleUserResponse } from "./userInterface";
 
 export interface ISingleCustomerResponse extends ISingleUserResponse {
   identityNo: string;
@@ -17,3 +17,21 @@ export interface ICustomersResponse {
   customers: ISingleCustomerResponse[];
   noOfCustomers: number;
 }
+
+export interface ICustomerBase {
+  address: string;
+  identityNo: string;
+  boxCaNumber: string;
+  customerNo: string;
+  activeConnection: boolean;
+  hasDigitalBox: boolean;
+  offerPowerIntake: boolean;
+  isDisconnected: boolean;
+  connectionStartDate: string;
+}
+
+export interface IAddCustomerRequest extends IAddUserRequest, ICustomerBase {
+  areaID: number;
+}
+
+export interface ICustomerResponse extends ISingleUserResponse, ICustomerBase {}

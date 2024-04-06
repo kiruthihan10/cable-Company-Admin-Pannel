@@ -3,5 +3,6 @@ export const urls = {
   company: "company",
   add: "add",
   edit: "edit",
-  employee: "employee"
+  employee: "employee",
+  customer: "customer",
 };

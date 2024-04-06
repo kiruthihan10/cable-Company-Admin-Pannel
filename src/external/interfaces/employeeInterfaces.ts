@@ -1,4 +1,4 @@
-import { ISingleUserResponse } from "./userInterface";
+import { IAddUserRequest, ISingleUserResponse } from "./userInterface";
 
 export interface ISingleEmployeeResponse extends ISingleUserResponse {
   isAdmin: boolean;
@@ -13,13 +13,7 @@ export interface IEmployeesResponse {
   noOfEmployees: number;
 }
 
-export interface IAddFirstEmployeeRequest {
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: number;
-}
+export interface IAddFirstEmployeeRequest extends IAddUserRequest {}
 
 export interface IAddEmployeeRequest extends IAddFirstEmployeeRequest {
   isAdmin: boolean;

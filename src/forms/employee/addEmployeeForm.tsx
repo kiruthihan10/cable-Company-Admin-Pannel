@@ -2,6 +2,7 @@ import AppNumberInput from "@/components/unitComponents/formComponents/numberInp
 import AppSwitch from "@/components/unitComponents/formComponents/switch";
 import AppTextInput from "@/components/unitComponents/textInput";
 import { Flex } from "antd";
+import AddUserForm from "../user/addUserForm";
 
 const AddEmployeeForm = () => {
   return (
@@ -19,35 +20,7 @@ const AddEmployeeForm = () => {
           <AppSwitch name={"isAdmin"} label="Admin" />
         </div>
       </Flex>
-      <Flex justify={"space-between"}>
-        <div style={{ width: "50%" }}>
-          <AppTextInput
-            name="firstName"
-            placeholder="FirstName"
-            label="FirstName"
-          />
-        </div>
-        <div style={{ width: "50%" }}>
-          <AppTextInput
-            name="lastName"
-            placeholder="LastName"
-            label="LastName"
-          />
-        </div>
-      </Flex>
-      <Flex>
-        <div style={{ width: "50%" }}>
-          <AppTextInput name="email" placeholder="Email" label="Email" />
-        </div>
-        <div style={{ width: "50%" }}>
-          <AppNumberInput
-            name="phoneNumber"
-            placeholder="PhoneNumber"
-            label="PhoneNumber"
-            addonBefore="07"
-          />
-        </div>
-      </Flex>
+      <AddUserForm />
     </>
   );
 };
