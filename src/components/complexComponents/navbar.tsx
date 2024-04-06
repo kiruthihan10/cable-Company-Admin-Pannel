@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/stores/userStore";
 import Icon from "@mdi/react";
-import { Menu, MenuProps } from "antd";
+import { Menu, MenuProps, Spin } from "antd";
 import {
   mdiDomain,
   mdiAccountHardHat,
@@ -47,9 +47,13 @@ const Navbar = (props: INavbar) => {
   const removeUser = useUserStore((state) => state.removeUser);
   const [items, setItems] = useState<MenuItem[]>();
   const [windowHeight, setWindowHeight] = useState(0);
+  const [showSpinner, setShowSpinner] = useState(true);
   useEffect(() => {
     setWindowHeight(window.innerHeight);
   }, []);
+  useEffect(() => {
+    setShowSpinner(window.location.pathname === "/" && user?.username === "");
+  }, [user?.username]);
   useEffect(() => {
     const commonTopItems: MenuItem[] = [
       getItem("Home", "home", <Icon path={mdiHome} size={1} />),
@@ -153,6 +157,10 @@ const Navbar = (props: INavbar) => {
       />
     </div>
   ) : null;
+  if (showSpinner) {
+    // Allow Store to load
+    return <Spin />;
+  }
   return (
     <div>
       {menuComponent}

@@ -28,8 +28,8 @@ export const useUserStore = create<IUserStoreState>()(
   persist(
     (set, get) => ({
       user: {
-        username: "abc",
-        password: "bxzc",
+        username: "",
+        password: "",
       },
       setUser: (user: IUser) => set({ user: user }),
       removeUser: () =>

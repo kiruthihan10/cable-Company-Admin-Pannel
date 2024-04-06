@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import AppSelect from "@/components/unitComponents/formComponents/select";
 import { ISingleAreaResponse } from "@/external/interfaces/areaInterface";
 import { DefaultOptionType } from "antd/es/select";
-import { useFormik, useFormikContext } from "formik";
 
 interface IAddCustomerForm {
   areas: ISingleAreaResponse[];
@@ -22,7 +21,6 @@ const AddCustomerForm = (props: IAddCustomerForm) => {
       label: area.name,
     });
   });
-  const { values } = useFormikContext();
   return (
     <>
       <Flex justify={"space-between"}>
