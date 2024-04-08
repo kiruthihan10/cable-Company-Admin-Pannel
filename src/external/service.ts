@@ -104,6 +104,9 @@ export const useAPIController = () => {
   const addEmployee = (addEmployeeRequest: IAddEmployeeRequest) => {
     return post<IEmployeeResponse>("/Employee", addEmployeeRequest);
   };
+  const getEmployee = (id: string) => {
+    return get<IEmployeeResponse>(`/Employee/${id}`);
+  };
 
   const getCustomers = (page?: number, size?: number, orderBy?: string) => {
     return get<ICustomersResponse>("/Customer", {
@@ -128,6 +131,7 @@ export const useAPIController = () => {
     setCompanyActiveStatus,
     getEmployees,
     addEmployee,
+    getEmployee,
     getCustomers,
     addCustomer,
     getAreas,

@@ -133,6 +133,15 @@ const Employees = () => {
   const addNewEmployee = () => {
     router.push(`/${urls.employee}/${urls.add}`);
   };
+  const onRow = (
+    record: ISingleEmployeeResponse,
+    rowIndex: number | undefined
+  ) => {
+    const onClick = () => {
+      router.push(`/${urls.employee}/${record.username}`);
+    };
+    return { onClick };
+  };
   if (isLoading) return <Spin />;
   return (
     <>
@@ -149,6 +158,7 @@ const Employees = () => {
         }}
         onChange={onTableChange}
         rowKey={generateRowKey}
+        onRow={onRow}
       />
     </>
   );
