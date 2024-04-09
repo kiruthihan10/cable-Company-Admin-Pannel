@@ -12,6 +12,7 @@ import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
 import { Card, Flex, Form, Spin } from "antd";
 import { Formik } from "formik";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IEmployeePageProps {
@@ -22,8 +23,9 @@ const EmployeePage = (props: IEmployeePageProps) => {
   const { params } = props;
   const { id } = params;
   const setHeader = useSystemStore((state) => state.setHeader);
+  const router = useRouter();
   const { getEmployee } = useAPIController();
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {
       return getEmployee(queryKey[1]);
     },
@@ -66,7 +68,7 @@ const EmployeePage = (props: IEmployeePageProps) => {
             style={{ width: `${windowWidth * 0.64}px` }}
           >
             <Flex vertical gap="small" style={{ width: "100%" }}>
-              <ViewEmployeeForm />
+              <ViewEmployeeForm employeeUserName={id} />
             </Flex>
           </Card>
         </Form>

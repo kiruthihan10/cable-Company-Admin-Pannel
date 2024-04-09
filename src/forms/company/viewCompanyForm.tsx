@@ -25,10 +25,11 @@ import { urls } from "@/constants";
 
 interface IViewCompanyForm {
   companyID: number;
+  contactPersonID: string;
 }
 
 const ViewCompanyForm = (props: IViewCompanyForm) => {
-  const { companyID } = props;
+  const { companyID, contactPersonID } = props;
   const { values } = useFormikContext<ICompanyForm>();
   const [windowWidth, setWidnowWidth] = useState(0);
   useEffect(() => {
@@ -51,7 +52,7 @@ const ViewCompanyForm = (props: IViewCompanyForm) => {
 
   const moveToEditCompantPage = () => {
     router.push(`/${urls.company}/${companyID}/${urls.edit}`);
-  };  
+  };
   const changeContactEmployee = () => {};
   const switchCompanyStatus = () => {
     mutate({ companyID: companyID, isActive: !values.isActive || false });
@@ -126,7 +127,7 @@ const ViewCompanyForm = (props: IViewCompanyForm) => {
               </Flex>
               <Divider />
               <Typography.Title level={4}>Contact Person</Typography.Title>
-              <ViewEmployeeForm />
+              <ViewEmployeeForm employeeUserName={contactPersonID} />
             </Flex>
           </Card>
         </Form>

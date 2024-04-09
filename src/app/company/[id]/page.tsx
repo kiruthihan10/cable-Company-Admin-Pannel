@@ -53,7 +53,10 @@ const CompanyPage = (props: ICompanyPageProps) => {
       enableReinitialize
       onSubmit={onSubmit}
     >
-      <ViewCompanyForm companyID={id} />
+      <ViewCompanyForm
+        companyID={id}
+        contactPersonID={data?.data.contactPerson.username || ""}
+      />
     </Formik>
   );
 };
