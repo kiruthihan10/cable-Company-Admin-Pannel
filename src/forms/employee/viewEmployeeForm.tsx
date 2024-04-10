@@ -12,7 +12,7 @@ const ViewEmployeeForm = (props: IViewEmployeeForm) => {
   const { employeeUserName } = props;
   const router = useRouter();
   const updateEmployee = () => {
-    router.push(`/employee/${employeeUserName}}`);
+    router.push(`/employee/${employeeUserName}/update`);
   };
   const manageEmployeeMenuItems: MenuProps["items"] = [
     {

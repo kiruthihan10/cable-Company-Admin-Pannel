@@ -15,7 +15,7 @@ import { Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface IEmployeePageProps {
+export interface IEmployeePageProps {
   params: { id: string };
 }
 
