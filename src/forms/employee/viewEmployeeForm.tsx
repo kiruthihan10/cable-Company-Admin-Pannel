@@ -47,7 +47,7 @@ const ViewEmployeeForm = (props: IViewEmployeeForm) => {
           <Dropdown menu={manageEmployeeMenuProps}>
             <Button>
               <Space>
-                Manage Company
+                Manage Employee
                 <DownOutlined />
               </Space>
             </Button>

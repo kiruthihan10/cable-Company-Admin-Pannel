@@ -6,10 +6,13 @@ export interface ISingleUserResponse {
   phoneNumber: number;
 }
 
-export interface IAddUserRequest {
-  password: string;
+export interface IBaseUserRequest {
   email: string;
   firstName: string;
   lastName: string;
   phoneNumber: number;
+}
+
+export interface IAddUserRequest extends IBaseUserRequest {
+  password: string;
 }

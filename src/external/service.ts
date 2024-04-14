@@ -11,6 +11,7 @@ import {
   IAddEmployeeRequest,
   IEmployeeResponse,
   IEmployeesResponse,
+  IUpdateEmployeeRequest,
 } from "./interfaces/employeeInterfaces";
 import {
   IAddCustomerRequest,
@@ -107,7 +108,12 @@ export const useAPIController = () => {
   const getEmployee = (id: string) => {
     return get<IEmployeeResponse>(`/Employee/${id}`);
   };
-
+  const updateEmployee = (addEmployeeRequest: IUpdateEmployeeRequest) => {
+    return post<IEmployeeResponse>(
+      `/Employee/${addEmployeeRequest.id}`,
+      addEmployeeRequest
+    );
+  };
   const getCustomers = (page?: number, size?: number, orderBy?: string) => {
     return get<ICustomersResponse>("/Customer", {
       page,
@@ -131,6 +137,7 @@ export const useAPIController = () => {
     setCompanyActiveStatus,
     getEmployees,
     addEmployee,
+    updateEmployee,
     getEmployee,
     getCustomers,
     addCustomer,
