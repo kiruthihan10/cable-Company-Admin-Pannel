@@ -127,6 +127,10 @@ export const useAPIController = () => {
       connectionStartDate: addCustomerRequest.connectionStartDate.slice(0, 10),
     });
   };
+
+  const getCustomer = (id: string) => {
+    return get<ICustomerResponse>(`/Customer/${id}`);
+  };
   const getAreas = () => {
     return get<IAreasResponse>("/Area");
   };
@@ -141,6 +145,7 @@ export const useAPIController = () => {
     getEmployee,
     getCustomers,
     addCustomer,
+    getCustomer,
     getAreas,
   };
 };

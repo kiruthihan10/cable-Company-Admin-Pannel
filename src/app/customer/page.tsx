@@ -157,9 +157,18 @@ const Customers = () => {
   const createCustomer = () => {
     router.push(`/${urls.customer}/${urls.add}`);
   };
+  const onRow = (
+    record: ISingleCustomerResponse,
+    rowIndex: number | undefined
+  ) => {
+    const onClick = () => {
+      router.push(`/${urls.customer}/${record.username}`);
+    };
+    return { onClick };
+  };
   return (
     <>
-      <AppButton text={"Add New Customer"} onClick={createCustomer}/>
+      <AppButton text={"Add New Customer"} onClick={createCustomer} />
       <Divider />
       <Table
         dataSource={customers}
@@ -172,6 +181,7 @@ const Customers = () => {
         }}
         onChange={onTableChange}
         rowKey={generateRowKey}
+        onRow={onRow}
       />
     </>
   );

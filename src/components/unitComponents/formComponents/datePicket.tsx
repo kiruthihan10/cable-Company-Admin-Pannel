@@ -8,10 +8,11 @@ interface IAppDatePicker {
   label: string;
   min?: string;
   max?: string;
+  readonly?: boolean;
 }
 
 const AppDatePicker = (props: IAppDatePicker) => {
-  const { name, label, min, max } = props;
+  const { name, label, min, max, readonly } = props;
   const [{ value, onChange }, { error }, { setValue }] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
@@ -29,6 +30,9 @@ const AppDatePicker = (props: IAppDatePicker) => {
         style={{ width: "100%" }}
         minDate={min ? dayjs(min) : undefined}
         maxDate={max ? dayjs(max) : undefined}
+        readOnly={readonly}
+        inputReadOnly={readonly}
+        disabled={readonly}
       />
       <Text type="danger">{error}</Text>
     </div>

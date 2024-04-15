@@ -44,7 +44,6 @@ const UpdateEmployee = (props: IEmployeePageProps) => {
     ...data?.data,
   };
   const onSubmit = (values: IUpdateEmployeeForm) => {
-    console.log(values);
     if (values.phoneNumber != undefined) {
       mutate({ id, ...values, phoneNumber: values.phoneNumber });
     }

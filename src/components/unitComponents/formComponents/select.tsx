@@ -7,10 +7,11 @@ interface IAppSelect {
   name: string;
   label: string;
   options: DefaultOptionType[];
+  readonly?: boolean;
 }
 
 const AppSelect = (props: IAppSelect) => {
-  const { name, label, options } = props;
+  const { name, label, options, readonly } = props;
   const [{ value, onChange }, { error }, {}] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
@@ -18,7 +19,14 @@ const AppSelect = (props: IAppSelect) => {
   return (
     <div style={{ marginLeft: "10px", marginRight: "10px" }}>
       {labelComponent}
-      <Select options={options} defaultValue={options[0]} value={value} onChange={onChange} style={{width:'100%'}} />
+      <Select
+        options={options}
+        defaultValue={options[0]}
+        value={value}
+        onChange={onChange}
+        style={{ width: "100%" }}
+        disabled={readonly}
+      />
       <Text type="danger">{error}</Text>
     </div>
   );
