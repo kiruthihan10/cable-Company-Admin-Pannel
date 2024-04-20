@@ -17,6 +17,7 @@ import {
   IAddCustomerRequest,
   ICustomerResponse,
   ICustomersResponse,
+  IUpdateCustomerRequest,
 } from "./interfaces/customerInterface";
 import { IAreasResponse } from "./interfaces/areaInterface";
 
@@ -131,6 +132,13 @@ export const useAPIController = () => {
   const getCustomer = (id: string) => {
     return get<ICustomerResponse>(`/Customer/${id}`);
   };
+
+  const updateCustomer = (addCustomerRequest: IUpdateCustomerRequest) => {
+    return post<ICustomerResponse>(
+      `/Customer/${addCustomerRequest.id}`,
+      addCustomerRequest
+    );
+  };
   const getAreas = () => {
     return get<IAreasResponse>("/Area");
   };
@@ -146,6 +154,7 @@ export const useAPIController = () => {
     getCustomers,
     addCustomer,
     getCustomer,
+    updateCustomer,
     getAreas,
   };
 };

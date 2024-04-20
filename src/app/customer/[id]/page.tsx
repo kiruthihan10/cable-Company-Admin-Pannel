@@ -14,7 +14,7 @@ import { Card, Flex, Spin } from "antd";
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 
-interface ICustomerPageProps {
+export interface ICustomerPageProps {
   params: { id: string };
 }
 

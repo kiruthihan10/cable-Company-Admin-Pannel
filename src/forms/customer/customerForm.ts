@@ -12,13 +12,15 @@ import {
 import * as Yup from "yup";
 import dayjs from "dayjs";
 
-export interface ICustomerForm extends IUserForm, ICustomerBase {}
-
-export interface IAddCustomerForm extends ICustomerForm, IPasswordForm {
+export interface ICustomerFormBase extends IUserForm, ICustomerBase {
   areaID: number | undefined;
 }
 
-export const CustomerFormInitialValues: ICustomerForm = {
+export interface IAddCustomerForm extends ICustomerFormBase, IPasswordForm {}
+
+export interface IUpdateCustomerForm extends ICustomerFormBase {}
+
+export const CustomerFormInitialValues: ICustomerFormBase = {
   ...UserFormInitialValues,
   identityNo: "",
   boxCaNumber: "",
@@ -29,15 +31,19 @@ export const CustomerFormInitialValues: ICustomerForm = {
   isDisconnected: false,
   address: "",
   connectionStartDate: dayjs().toISOString(),
+  areaID: 0,
 };
 
 export const AddCustomerFormInitialValues: IAddCustomerForm = {
   ...CustomerFormInitialValues,
   ...PasswordFormInitialValues,
-  areaID: 0,
 };
 
-export const CustomerFormValidation: Yup.ObjectSchema<ICustomerForm> =
+export const UpdateCustomerFormInitialValues: IUpdateCustomerForm = {
+  ...CustomerFormInitialValues,
+};
+
+export const CustomerFormValidation: Yup.ObjectSchema<ICustomerFormBase> =
   UserFormValidation.shape({
     identityNo: Yup.string().required(),
     boxCaNumber: Yup.string().required(),
@@ -48,9 +54,11 @@ export const CustomerFormValidation: Yup.ObjectSchema<ICustomerForm> =
     isDisconnected: Yup.bool().required(),
     address: Yup.string().required(),
     connectionStartDate: Yup.string().required(),
+    areaID: Yup.number().required(),
   });
 
 export const AddCustomerFormValidation: Yup.ObjectSchema<IAddCustomerForm> =
-  CustomerFormValidation.concat(PasswordFormValidation).shape({
-    areaID: Yup.number().required(),
-  });
+  CustomerFormValidation.concat(PasswordFormValidation).shape({});
+
+export const UpdateCustomerFormValidation: Yup.ObjectSchema<IUpdateCustomerForm> =
+  CustomerFormValidation.shape({});

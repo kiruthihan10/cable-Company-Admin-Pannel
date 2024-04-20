@@ -1,4 +1,8 @@
-import { IAddUserRequest, ISingleUserResponse } from "./userInterface";
+import {
+  IAddUserRequest,
+  IBaseUserRequest,
+  ISingleUserResponse,
+} from "./userInterface";
 
 export interface ISingleCustomerResponse extends ISingleUserResponse {
   identityNo: string;
@@ -35,3 +39,10 @@ export interface IAddCustomerRequest extends IAddUserRequest, ICustomerBase {
 }
 
 export interface ICustomerResponse extends ISingleUserResponse, ICustomerBase {}
+
+export interface IUpdateCustomerRequest
+  extends ICustomerBase,
+    IBaseUserRequest {
+  id: string;
+  areaID: number;
+}

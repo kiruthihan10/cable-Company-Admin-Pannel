@@ -1,18 +1,15 @@
+import AppDatePicker from "@/components/unitComponents/formComponents/datePicket";
+import AppSelect from "@/components/unitComponents/formComponents/select";
 import AppSwitch from "@/components/unitComponents/formComponents/switch";
 import AppTextInput from "@/components/unitComponents/textInput";
 import { Flex } from "antd";
-import AddUserForm from "../user/addUserForm";
-import AppDatePicker from "@/components/unitComponents/formComponents/datePicket";
 import dayjs from "dayjs";
-import AppSelect from "@/components/unitComponents/formComponents/select";
-import { ISingleAreaResponse } from "@/external/interfaces/areaInterface";
+import AddUserForm from "../user/addUserForm";
+import { IAddCustomerForm } from "./addCustomerForm";
 import { DefaultOptionType } from "antd/es/select";
+import { useFormikContext } from "formik";
 
-export interface IAddCustomerForm {
-  areas: ISingleAreaResponse[];
-}
-
-const AddCustomerForm = (props: IAddCustomerForm) => {
+const UpdateCustomerForm = (props: IAddCustomerForm) => {
   const { areas } = props;
   const options: DefaultOptionType[] = [];
   areas.forEach((area) => {
@@ -21,18 +18,12 @@ const AddCustomerForm = (props: IAddCustomerForm) => {
       label: area.name,
     });
   });
+  const { values } = useFormikContext();
+  console.log(values)
   return (
     <>
       <Flex justify={"space-between"}>
-        <div style={{ width: "50%" }}>
-          <AppTextInput
-            name="password"
-            placeholder="Password"
-            label="Password"
-            isPassword
-          />
-        </div>
-        <div style={{ width: "50%" }}>
+        <div style={{ width: "100%" }}>
           <AppSelect name="areaID" label="Area" options={options} />
         </div>
       </Flex>
@@ -97,4 +88,4 @@ const AddCustomerForm = (props: IAddCustomerForm) => {
   );
 };
 
-export default AddCustomerForm;
+export default UpdateCustomerForm;
