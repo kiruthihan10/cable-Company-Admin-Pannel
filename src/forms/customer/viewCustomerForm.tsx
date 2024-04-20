@@ -26,7 +26,7 @@ const ViewCustomerForm = (props: IVewiCustomerForm) => {
   const manageCustomerMenuItems: MenuProps["items"] = [
     {
       key: 1,
-      label: "Update Employee",
+      label: "Update Customer",
       onClick: updateCustomer,
     },
   ];
