@@ -18,6 +18,7 @@ export default function Login() {
   const setUserType = useUserStore((state) => state.setUserType);
   const setToken = useUserStore((state) => state.setToken);
   const setHeader = useSystemStore((state) => state.setHeader);
+  const user = useUserStore((state) => state.user);
   const router = useRouter();
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.login],
@@ -34,6 +35,9 @@ export default function Login() {
   useEffect(() => {
     setHeader("Login");
   });
+  if (user?.token != null) {
+    router.push(`/${urls.home}`);
+  }
   const initialValues: ILoginRequest = {
     username: "",
     password: "",
