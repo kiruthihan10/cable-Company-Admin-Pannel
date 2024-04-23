@@ -8,11 +8,7 @@ import FormButton from "@/components/unitComponents/formComponents/button";
 import { useWindow } from "@/external/utils";
 
 const LoginForm = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
-  const windowWidth = useWindow();
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
+  const { windowWidth, windowHeight } = useWindow();
   return (
     <Form>
       <Flex

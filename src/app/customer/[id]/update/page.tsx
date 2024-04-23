@@ -21,7 +21,7 @@ const UpdateCustomer = (props: ICustomerPageProps) => {
   const { params } = props;
   const { id } = params;
   const router = useRouter();
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   const { getCustomer, updateCustomer, getAreas } = useAPIController();
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {

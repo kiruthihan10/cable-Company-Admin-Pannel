@@ -35,7 +35,7 @@ const EmployeePage = (props: IEmployeePageProps) => {
   useEffect(() => {
     setHeader("Employees");
   });
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   if (isLoading) {
     return <Spin spinning fullscreen />;
   }

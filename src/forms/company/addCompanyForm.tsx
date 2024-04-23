@@ -7,7 +7,7 @@ import AddFirstTimeEmployeeForm from "../employee/addFirstEmployeeForm";
 import { useWindow } from "@/external/utils";
 
 const AddCompanyForm = () => {
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   return (
     <>
       <Flex

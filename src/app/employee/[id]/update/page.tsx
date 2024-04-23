@@ -22,7 +22,7 @@ const UpdateEmployee = (props: IEmployeePageProps) => {
   const { params } = props;
   const { id } = params;
   const router = useRouter();
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   const { getEmployee, updateEmployee } = useAPIController();
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {

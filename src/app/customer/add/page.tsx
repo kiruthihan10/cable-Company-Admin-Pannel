@@ -36,7 +36,7 @@ const AddCustomer = () => {
     queryFn: getAreas,
     queryKey: [queryKeys.areas],
   });
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   const onSubmit = (values: IAddCustomerForm) => {
     mutate({
       ...values,

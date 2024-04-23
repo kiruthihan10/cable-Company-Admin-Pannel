@@ -32,7 +32,7 @@ const AddEmployee = () => {
       router.push(`/${urls.employee}`);
     },
   });
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   const onSubmit = (values: IAddEmployeeForm) => {
     mutate({ ...values, phoneNumber: values.phoneNumber || 0 });
   };

@@ -41,7 +41,7 @@ const CustomerPage = (props: ICustomerPageProps) => {
   useEffect(() => {
     setHeader("Customers");
   });
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   if (isLoading || isAreasLoading) {
     return <Spin spinning fullscreen />;
   }

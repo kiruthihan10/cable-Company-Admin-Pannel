@@ -31,7 +31,7 @@ interface IViewCompanyForm {
 const ViewCompanyForm = (props: IViewCompanyForm) => {
   const { companyID, contactPersonID } = props;
   const { values } = useFormikContext<ICompanyForm>();
-  const windowWidth = useWindow();
+  const {windowWidth} = useWindow();
   const { setCompanyActiveStatus } = useAPIController();
   const { mutate } = useMutation({
     mutationKey: [

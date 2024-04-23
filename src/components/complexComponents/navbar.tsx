@@ -17,6 +17,7 @@ import {
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { urls } from "@/constants";
+import { useWindow } from "@/external/utils";
 
 interface INavbar {
   children: React.ReactNode;
@@ -46,11 +47,8 @@ const Navbar = (props: INavbar) => {
   const user = useUserStore((state) => state.user);
   const removeUser = useUserStore((state) => state.removeUser);
   const [items, setItems] = useState<MenuItem[]>();
-  const [windowHeight, setWindowHeight] = useState(0);
+  const { windowHeight } = useWindow();
   const [showSpinner, setShowSpinner] = useState(true);
-  useEffect(() => {
-    setWindowHeight(window.innerHeight);
-  }, []);
   useEffect(() => {
     setShowSpinner(window.location.pathname === "/" && user?.username === "");
   }, [user?.username]);
