@@ -38,7 +38,9 @@ export interface IAddCustomerRequest extends IAddUserRequest, ICustomerBase {
   areaID: number;
 }
 
-export interface ICustomerResponse extends ISingleUserResponse, ICustomerBase {}
+export interface ICustomerResponse extends ISingleUserResponse, ICustomerBase {
+  areaID: number;
+}
 
 export interface IUpdateCustomerRequest
   extends ICustomerBase,

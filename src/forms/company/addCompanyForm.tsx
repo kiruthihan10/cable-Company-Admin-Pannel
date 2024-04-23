@@ -4,12 +4,10 @@ import FormButton from "@/components/unitComponents/formComponents/button";
 import { useEffect, useState } from "react";
 import AppTextInput from "@/components/unitComponents/textInput";
 import AddFirstTimeEmployeeForm from "../employee/addFirstEmployeeForm";
+import { useWindow } from "@/external/utils";
 
 const AddCompanyForm = () => {
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   return (
     <>
       <Flex

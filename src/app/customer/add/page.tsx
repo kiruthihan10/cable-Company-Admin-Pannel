@@ -4,6 +4,7 @@ import FormButton from "@/components/unitComponents/formComponents/button";
 import { urls } from "@/constants";
 import { mutationKeys, queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
+import { useWindow } from "@/external/utils";
 import AddCustomerForm from "@/forms/customer/addCustomerForm";
 import {
   AddCustomerFormInitialValues,
@@ -35,10 +36,7 @@ const AddCustomer = () => {
     queryFn: getAreas,
     queryKey: [queryKeys.areas],
   });
-  const [windowWidth, setWindowWidth] = useState(0);
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   const onSubmit = (values: IAddCustomerForm) => {
     mutate({
       ...values,

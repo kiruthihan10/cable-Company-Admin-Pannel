@@ -11,7 +11,6 @@ import {
   Typography,
 } from "antd";
 import { Form, useFormikContext } from "formik";
-import { useEffect, useState } from "react";
 import AppTextInput from "@/components/unitComponents/textInput";
 import { ICompanyForm } from "./companyForm";
 import AppSwitch from "@/components/unitComponents/formComponents/switch";
@@ -22,6 +21,7 @@ import { useMutation } from "@tanstack/react-query";
 import { mutationKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { urls } from "@/constants";
+import { useWindow } from "@/external/utils";
 
 interface IViewCompanyForm {
   companyID: number;
@@ -31,10 +31,7 @@ interface IViewCompanyForm {
 const ViewCompanyForm = (props: IViewCompanyForm) => {
   const { companyID, contactPersonID } = props;
   const { values } = useFormikContext<ICompanyForm>();
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   const { setCompanyActiveStatus } = useAPIController();
   const { mutate } = useMutation({
     mutationKey: [

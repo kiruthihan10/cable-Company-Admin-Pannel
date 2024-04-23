@@ -2,6 +2,7 @@
 
 import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
+import { useWindow } from "@/external/utils";
 import {
   EmployeeFormInitialValues,
   EmployeeFormValidation,
@@ -13,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, Flex, Form, Spin } from "antd";
 import { Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export interface IEmployeePageProps {
   params: { id: string };
@@ -34,10 +35,7 @@ const EmployeePage = (props: IEmployeePageProps) => {
   useEffect(() => {
     setHeader("Employees");
   });
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   if (isLoading) {
     return <Spin spinning fullscreen />;
   }

@@ -2,9 +2,10 @@
 
 import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
+import { useWindow } from "@/external/utils";
 import {
   CustomerFormInitialValues,
-  ICustomerForm,
+  ICustomerFormBase,
 } from "@/forms/customer/customerForm";
 import ViewCustomerForm from "@/forms/customer/viewCustomerForm";
 import { EmployeeFormValidation } from "@/forms/employee/employeeForm";
@@ -12,7 +13,7 @@ import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
 import { Card, Flex, Spin } from "antd";
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export interface ICustomerPageProps {
   params: { id: string };
@@ -40,15 +41,12 @@ const CustomerPage = (props: ICustomerPageProps) => {
   useEffect(() => {
     setHeader("Customers");
   });
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   if (isLoading || isAreasLoading) {
     return <Spin spinning fullscreen />;
   }
-  const initialValues: ICustomerForm = data?.data
-    ? { ...data.data }
+  const initialValues: ICustomerFormBase = data?.data
+    ? CustomerFormInitialValues
     : CustomerFormInitialValues;
   return (
     <Formik

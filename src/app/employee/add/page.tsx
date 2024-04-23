@@ -4,6 +4,7 @@ import FormButton from "@/components/unitComponents/formComponents/button";
 import { urls } from "@/constants";
 import { mutationKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
+import { useWindow } from "@/external/utils";
 import AddEmployeeForm from "@/forms/employee/addEmployeeForm";
 import {
   AddEmployeeFormInitialValues,
@@ -31,10 +32,7 @@ const AddEmployee = () => {
       router.push(`/${urls.employee}`);
     },
   });
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   const onSubmit = (values: IAddEmployeeForm) => {
     mutate({ ...values, phoneNumber: values.phoneNumber || 0 });
   };

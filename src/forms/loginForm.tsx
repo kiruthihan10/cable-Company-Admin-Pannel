@@ -5,15 +5,13 @@ import { Card, Flex } from "antd";
 import { useEffect, useState } from "react";
 import AppTextInput from "@/components/unitComponents/textInput";
 import FormButton from "@/components/unitComponents/formComponents/button";
+import { useWindow } from "@/external/utils";
 
 const LoginForm = () => {
   const [windowHeight, setWindowHeight] = useState(0);
-  const [windowWidth, setWidnowWidth] = useState(0);
+  const windowWidth = useWindow();
   useEffect(() => {
     setWindowHeight(window.innerHeight);
-  }, []);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
   }, []);
   return (
     <Form>

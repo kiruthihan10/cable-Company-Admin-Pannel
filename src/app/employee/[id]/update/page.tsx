@@ -16,15 +16,13 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import UpdateEmployeeForm from "@/forms/employee/updateEmployeeForm";
 import { useRouter } from "next/navigation";
 import { urls } from "@/constants";
+import { useWindow } from "@/external/utils";
 
 const UpdateEmployee = (props: IEmployeePageProps) => {
   const { params } = props;
   const { id } = params;
   const router = useRouter();
-  const [windowWidth, setWidnowWidth] = useState(0);
-  useEffect(() => {
-    setWidnowWidth(window.innerWidth);
-  }, []);
+  const windowWidth = useWindow();
   const { getEmployee, updateEmployee } = useAPIController();
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {
