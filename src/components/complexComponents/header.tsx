@@ -14,6 +14,8 @@ const Header = () => {
         width: "100%",
         borderBottom: "1px solid black",
         height: 120,
+        zIndex: 1,
+        background: "white",
       }}
     >
       <Flex align="center" style={{ width: "100%" }}>
