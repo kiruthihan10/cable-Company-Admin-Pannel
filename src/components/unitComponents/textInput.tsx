@@ -2,7 +2,7 @@
 
 import { Input, Typography } from "antd";
 import { useField } from "formik";
-const { Text } = Typography;
+import ErrorText from "./formComponents/errorText";
 
 interface IAppTextInput {
   name: string;
@@ -24,7 +24,7 @@ const AppTextInput = (props: IAppTextInput) => {
     readonly = false,
     isTextArea = false,
   } = props;
-  const [{ value, onChange }, { error }, {}] = useField(name);
+  const [{ value, onChange, onBlur }, { error }, {}] = useField(name);
 
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
@@ -37,6 +37,7 @@ const AppTextInput = (props: IAppTextInput) => {
       onChange={onChange}
       disabled={disabled}
       readOnly={readonly}
+      onBlur={onBlur}
     />
   ) : isTextArea ? (
     <Input.TextArea
@@ -46,6 +47,7 @@ const AppTextInput = (props: IAppTextInput) => {
       onChange={onChange}
       disabled={disabled}
       readOnly={readonly}
+      onBlur={onBlur}
     />
   ) : (
     <Input
@@ -55,13 +57,15 @@ const AppTextInput = (props: IAppTextInput) => {
       onChange={onChange}
       disabled={disabled}
       readOnly={readonly}
+      onBlur={onBlur}
     />
   );
   return (
     <div style={{ marginLeft: "10px", marginRight: "10px" }}>
       {labelComponent}
       {inputComponent}
-      <Text type="danger">{error}</Text>
+      {/* <ErrorText name={name} /> */}
+      <ErrorText name={name} />
     </div>
   );
 };

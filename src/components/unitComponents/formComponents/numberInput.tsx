@@ -1,5 +1,6 @@
 import { Input, InputNumber, Typography } from "antd";
 import { useField } from "formik";
+import ErrorText from "./errorText";
 const { Text } = Typography;
 
 interface IAppNumberInput {
@@ -22,7 +23,8 @@ const AppNumberInput = (props: IAppNumberInput) => {
     disabled = false,
     readonly = false,
   } = props;
-  const [{ value, onChange }, { error }, {}] = useField(name);
+  const [{ value, onChange, onBlur }, { error, touched }, {}] = useField(name);
+  console.log(touched);
 
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
@@ -43,8 +45,9 @@ const AppNumberInput = (props: IAppNumberInput) => {
         addonBefore={addonBefore}
         disabled={disabled}
         readOnly={readonly}
+        onBlur={onBlur}
       />
-      <Text type="danger">{error}</Text>
+      <ErrorText name={name} />
     </div>
   );
 };

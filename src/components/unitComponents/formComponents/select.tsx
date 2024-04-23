@@ -1,6 +1,7 @@
 import { Select, Typography } from "antd";
 import { DefaultOptionType } from "antd/es/select";
 import { useField } from "formik";
+import ErrorText from "./errorText";
 const { Text } = Typography;
 
 interface IAppSelect {
@@ -12,7 +13,7 @@ interface IAppSelect {
 
 const AppSelect = (props: IAppSelect) => {
   const { name, label, options, readonly } = props;
-  const [{ value, onChange }, { error }, {}] = useField(name);
+  const [{ value, onChange, onBlur }, { error }, {}] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
   ) : null;
@@ -26,8 +27,9 @@ const AppSelect = (props: IAppSelect) => {
         onChange={onChange}
         style={{ width: "100%" }}
         disabled={readonly}
+        onBlur={onBlur}
       />
-      <Text type="danger">{error}</Text>
+      <ErrorText name={name} />
     </div>
   );
 };

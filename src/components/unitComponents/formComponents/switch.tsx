@@ -3,6 +3,7 @@
 import { Switch, Typography } from "antd";
 import { useField } from "formik";
 import { ReactNode } from "react";
+import ErrorText from "./errorText";
 const { Text } = Typography;
 
 interface IAppSwitch {
@@ -32,7 +33,7 @@ const AppSwitch = (props: IAppSwitch) => {
         onChange={onValChange}
         disabled={disabled}
       />
-      <Text type="danger">{error}</Text>
+      <ErrorText name={name} />
     </div>
   );
 };
