@@ -139,8 +139,12 @@ export const useAPIController = () => {
       addCustomerRequest
     );
   };
-  const getAreas = () => {
-    return get<IAreasResponse>("/Area");
+  const getAreas = (page?: number, size?: number, orderBy?: string) => {
+    return get<IAreasResponse>("/Area", {
+      page,
+      size,
+      orderBy,
+    });
   };
   return {
     getCompanies,

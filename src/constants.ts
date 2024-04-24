@@ -5,4 +5,5 @@ export const urls = {
   edit: "edit",
   employee: "employee",
   customer: "customer",
+  area: "area",
 };

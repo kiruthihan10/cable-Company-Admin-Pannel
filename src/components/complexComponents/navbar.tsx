@@ -150,6 +150,8 @@ const Navbar = (props: INavbar) => {
             case "addEmployee":
               router.push(`/${urls.employee}/${urls.add}`);
               break;
+            case "areas":
+              router.push(`/${urls.area}`);
           }
         }}
       />
