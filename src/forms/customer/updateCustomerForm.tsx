@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import AddUserForm from "../user/addUserForm";
 import { IAddCustomerForm } from "./addCustomerForm";
 import { DefaultOptionType } from "antd/es/select";
-import { useFormikContext } from "formik";
 
 const UpdateCustomerForm = (props: IAddCustomerForm) => {
   const { areas } = props;
@@ -18,8 +17,6 @@ const UpdateCustomerForm = (props: IAddCustomerForm) => {
       label: area.name,
     });
   });
-  const { values } = useFormikContext();
-  console.log(values)
   return (
     <>
       <Flex justify={"space-between"}>

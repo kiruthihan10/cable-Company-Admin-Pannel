@@ -24,7 +24,6 @@ const AppNumberInput = (props: IAppNumberInput) => {
     readonly = false,
   } = props;
   const [{ value, onChange, onBlur }, { error, touched }, {}] = useField(name);
-  console.log(touched);
 
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>

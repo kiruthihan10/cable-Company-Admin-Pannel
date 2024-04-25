@@ -11,7 +11,6 @@ interface IDangerText {
 const ErrorText = (props: IDangerText) => {
   const { name } = props;
   const [{}, { error, touched }, {}] = useField(name);
-  console.log([name, touched]);
   if (touched) return <ErrorText name={name} />;
 };
 
