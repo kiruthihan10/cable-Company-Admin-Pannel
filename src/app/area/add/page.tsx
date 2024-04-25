@@ -29,7 +29,7 @@ const AddArea = () => {
     mutationKey: [mutationKeys.area],
     mutationFn: addArea,
     onSuccess: () => {
-      router.push(`/${urls.customer}`);
+      router.push(`/${urls.area}`);
     },
   });
   const { data, isLoading } = useQuery({

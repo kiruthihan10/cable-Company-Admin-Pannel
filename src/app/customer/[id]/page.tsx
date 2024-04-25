@@ -28,7 +28,7 @@ const CustomerPage = (props: ICustomerPageProps) => {
     queryFn: ({ queryKey }) => {
       return getCustomer(queryKey[1]);
     },
-    queryKey: [queryKeys.employees, id],
+    queryKey: [queryKeys.customers, id],
   });
   const {
     data: areas,
@@ -47,9 +47,8 @@ const CustomerPage = (props: ICustomerPageProps) => {
   if (isLoading || isAreasLoading) {
     return <Spin spinning fullscreen />;
   }
-  const initialValues: ICustomerFormBase = data?.data
-    ? CustomerFormInitialValues
-    : CustomerFormInitialValues;
+  const initialValues: ICustomerFormBase =
+    data?.data == undefined ? CustomerFormInitialValues : data?.data;
   return (
     <Formik
       initialValues={initialValues}

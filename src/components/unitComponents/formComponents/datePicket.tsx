@@ -2,7 +2,6 @@ import { DatePicker, DatePickerProps, Typography } from "antd";
 import dayjs from "dayjs";
 import { useField } from "formik";
 import ErrorText from "./errorText";
-const { Text } = Typography;
 
 interface IAppDatePicker {
   name: string;
@@ -14,12 +13,12 @@ interface IAppDatePicker {
 
 const AppDatePicker = (props: IAppDatePicker) => {
   const { name, label, min, max, readonly } = props;
-  const [{ value, onChange, onBlur }, { error }, { setValue }] = useField(name);
+  const [{ value, onBlur }, {}, { setValue }] = useField(name);
   const labelComponent = label ? (
     <Typography.Title level={5}>{label}</Typography.Title>
   ) : null;
   const onValueChange: DatePickerProps["onChange"] = (date, dateString) => {
-    onChange(setValue(dateString));
+    setValue(dateString);
   };
   return (
     <div style={{ marginLeft: "10px", marginRight: "10px" }}>
