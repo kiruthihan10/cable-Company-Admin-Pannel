@@ -11,7 +11,7 @@ interface IDangerText {
 const ErrorText = (props: IDangerText) => {
   const { name } = props;
   const [{}, { error, touched }, {}] = useField(name);
-  if (touched) return <ErrorText name={name} />;
+  if (touched) return <Text type="danger">{error}</Text>;
 };
 
 export default ErrorText;
