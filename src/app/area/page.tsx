@@ -1,6 +1,7 @@
 "use client";
 
 import AppButton from "@/components/unitComponents/button";
+import { urls } from "@/constants";
 import {
   IAreaAgent,
   ISingleAreaResponse,
@@ -88,12 +89,14 @@ const Areas = () => {
   const generateRowKey = (record: ISingleAreaResponse) => {
     return record.id;
   };
-  const createArea = () => {};
+  const createArea = () => {
+    router.push(`/${urls.area}/${urls.add}`);
+  };
   const onRow = (record: ISingleAreaResponse, rowIndex: number | undefined) => {
     const onClick = () => {};
     return { onClick };
   };
-  return(
+  return (
     <>
       <AppButton text={"Add New Area"} onClick={createArea} />
       <Divider />
@@ -111,7 +114,7 @@ const Areas = () => {
         onRow={onRow}
       />
     </>
-  )
+  );
 };
 
 export default Areas;

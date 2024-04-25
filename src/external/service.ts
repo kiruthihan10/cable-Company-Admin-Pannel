@@ -19,7 +19,12 @@ import {
   ICustomersResponse,
   IUpdateCustomerRequest,
 } from "./interfaces/customerInterface";
-import { IAreasResponse } from "./interfaces/areaInterface";
+import {
+  IAddAreaRequest,
+  IAreaResponse,
+  IAreasResponse,
+  ISingleAreaResponse,
+} from "./interfaces/areaInterface";
 
 export interface ILoginRequest {
   username: string;
@@ -146,6 +151,10 @@ export const useAPIController = () => {
       orderBy,
     });
   };
+
+  const addArea = (request: IAddAreaRequest) => {
+    return post<IAreaResponse>("/Area", request);
+  };
   return {
     getCompanies,
     addCompany,
@@ -160,5 +169,6 @@ export const useAPIController = () => {
     getCustomer,
     updateCustomer,
     getAreas,
+    addArea,
   };
 };

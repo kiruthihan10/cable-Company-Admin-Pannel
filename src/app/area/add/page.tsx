@@ -5,55 +5,52 @@ import { urls } from "@/constants";
 import { mutationKeys, queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useWindow } from "@/external/utils";
-import AddCustomerForm from "@/forms/customer/addCustomerForm";
+import AddAreaForm from "@/forms/area/addAreaForm";
 import {
-  AddCustomerFormInitialValues,
-  AddCustomerFormValidation,
-  IAddCustomerForm,
-} from "@/forms/customer/customerForm";
+  AreaFormValidation,
+  AreaFromInitialValues,
+  IAreaForm,
+} from "@/forms/area/areaForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Flex, Card } from "antd";
+import { Card, Flex } from "antd";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const AddCustomer = () => {
+const AddArea = () => {
   const router = useRouter();
+  const { addArea, getEmployees } = useAPIController();
   const setHeader = useSystemStore((state) => state.setHeader);
-  const { addCustomer, getAreas } = useAPIController();
   useEffect(() => {
-    setHeader("Add Customer");
+    setHeader("Add Area");
   });
   const { mutate } = useMutation({
-    mutationKey: [mutationKeys.customer],
-    mutationFn: addCustomer,
+    mutationKey: [mutationKeys.area],
+    mutationFn: addArea,
     onSuccess: () => {
       router.push(`/${urls.customer}`);
     },
   });
   const { data, isLoading } = useQuery({
     queryFn: () => {
-      return getAreas();
+      return getEmployees();
     },
-    queryKey: [queryKeys.areas],
+    queryKey: [queryKeys.employees],
   });
   const { windowWidth } = useWindow();
-  const onSubmit = (values: IAddCustomerForm) => {
+  const onSubmit = (values: IAreaForm) => {
     mutate({
       ...values,
-      phoneNumber: values.phoneNumber || 0,
-      areaID: values.areaID || -1,
     });
   };
-
   return (
     <Formik
       initialValues={{
-        ...AddCustomerFormInitialValues,
-        areaID: data?.data.areas[0].id,
+        ...AreaFromInitialValues,
+        agentId: data?.data.employees[0].username || "",
       }}
-      validationSchema={AddCustomerFormValidation}
+      validationSchema={AreaFormValidation}
       enableReinitialize
       onSubmit={onSubmit}
     >
@@ -66,11 +63,11 @@ const AddCustomer = () => {
         >
           <Form>
             <Card
-              title={"Add Employee"}
+              title={"Add Area"}
               style={{ width: `${windowWidth * 0.64}px` }}
             >
               <Flex vertical gap="small" style={{ width: "100%" }}>
-                <AddCustomerForm areas={data?.data.areas || []} />
+                <AddAreaForm employees={data?.data.employees || []} />
                 <FormButton center text="Add" isSubmit />
               </Flex>
             </Card>
@@ -81,4 +78,4 @@ const AddCustomer = () => {
   );
 };
 
-export default AddCustomer;
+export default AddArea;

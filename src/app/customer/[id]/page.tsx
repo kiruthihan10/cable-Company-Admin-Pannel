@@ -35,13 +35,15 @@ const CustomerPage = (props: ICustomerPageProps) => {
     isLoading: isAreasLoading,
     error: areasError,
   } = useQuery({
-    queryFn: getAreas,
+    queryFn: () => {
+      return getAreas();
+    },
     queryKey: [queryKeys.areas],
   });
   useEffect(() => {
     setHeader("Customers");
   });
-  const {windowWidth} = useWindow();
+  const { windowWidth } = useWindow();
   if (isLoading || isAreasLoading) {
     return <Spin spinning fullscreen />;
   }

@@ -11,4 +11,5 @@ export const mutationKeys = {
   activeStatus: "activeStatus",
   employee: "employee",
   customer: "customer",
+  area: "area",
 };

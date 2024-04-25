@@ -11,7 +11,8 @@ export type header =
   | "Companies"
   | "Add Companies"
   | "Home"
-  | "Areas";
+  | "Areas"
+  | "Add Area";
 
 interface ISystemStoreState {
   header: header;
