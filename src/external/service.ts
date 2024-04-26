@@ -155,6 +155,10 @@ export const useAPIController = () => {
   const addArea = (request: IAddAreaRequest) => {
     return post<IAreaResponse>("/Area", request);
   };
+
+  const getArea = (id: number) => {
+    return get<IAreaResponse>(`/Area/${id}`);
+  };
   return {
     getCompanies,
     addCompany,
@@ -170,5 +174,6 @@ export const useAPIController = () => {
     updateCustomer,
     getAreas,
     addArea,
+    getArea,
   };
 };

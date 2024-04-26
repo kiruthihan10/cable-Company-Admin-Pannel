@@ -4,7 +4,6 @@ import { urls } from "@/constants";
 import { Button, Dropdown, Flex, MenuProps, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-import { useFormikContext } from "formik";
 import AppDatePicker from "@/components/unitComponents/formComponents/datePicket";
 import AppSwitch from "@/components/unitComponents/formComponents/switch";
 import dayjs from "dayjs";
@@ -12,12 +11,12 @@ import AppSelect from "@/components/unitComponents/formComponents/select";
 import { DefaultOptionType } from "antd/es/select";
 import { ISingleAreaResponse } from "@/external/interfaces/areaInterface";
 
-interface IVewiCustomerForm {
+interface IViewCustomerForm {
   customerUserName: string;
   areas: ISingleAreaResponse[];
 }
 
-const ViewCustomerForm = (props: IVewiCustomerForm) => {
+const ViewCustomerForm = (props: IViewCustomerForm) => {
   const { customerUserName, areas } = props;
   const router = useRouter();
   const updateCustomer = () => {

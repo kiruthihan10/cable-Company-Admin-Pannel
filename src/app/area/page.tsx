@@ -93,7 +93,9 @@ const Areas = () => {
     router.push(`/${urls.area}/${urls.add}`);
   };
   const onRow = (record: ISingleAreaResponse, rowIndex: number | undefined) => {
-    const onClick = () => {};
+    const onClick = () => {
+      router.push(`/${urls.area}/${record.id}`);
+    };
     return { onClick };
   };
   return (
