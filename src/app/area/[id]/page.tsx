@@ -16,14 +16,14 @@ import { Form, Formik } from "formik";
 import { useEffect } from "react";
 
 export interface IAreaPageProps {
-  params: { id: string };
+  params: { id: number };
 }
 
 const AreaPage = (props: IAreaPageProps) => {
   const { params } = props;
   const { id } = params;
   const setHeader = useSystemStore((state) => state.setHeader);
-  const { getArea, getEmployees } = useAPIController();
+  const { getArea } = useAPIController();
   const { data, isLoading } = useQuery({
     queryFn: ({ queryKey }) => {
       return getArea(Number(queryKey[1]));

@@ -31,6 +31,10 @@ export interface IAddAreaRequest {
   agentId: string;
 }
 
+export interface IUpdateAreaRequest extends IAddAreaRequest {
+  id: number;
+}
+
 export interface IAreaResponse extends IBaseAreaResponse {
   customers: ICustomerResponse[];
 }

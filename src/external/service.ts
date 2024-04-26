@@ -24,6 +24,7 @@ import {
   IAreaResponse,
   IAreasResponse,
   ISingleAreaResponse,
+  IUpdateAreaRequest,
 } from "./interfaces/areaInterface";
 
 export interface ILoginRequest {
@@ -159,6 +160,11 @@ export const useAPIController = () => {
   const getArea = (id: number) => {
     return get<IAreaResponse>(`/Area/${id}`);
   };
+
+  const updateArea = (request: IUpdateAreaRequest) => {
+    return post<IAreaResponse>(`/Area/${request.id}`, request);
+  };
+
   return {
     getCompanies,
     addCompany,
@@ -175,5 +181,6 @@ export const useAPIController = () => {
     getAreas,
     addArea,
     getArea,
+    updateArea,
   };
 };

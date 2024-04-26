@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { DownOutlined } from "@ant-design/icons";
 
 interface IViewAreaForm {
-  areaId: string;
+  areaId: number;
   agent: IAreaAgent;
 }
 
