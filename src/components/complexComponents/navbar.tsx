@@ -93,10 +93,10 @@ const Navbar = (props: INavbar) => {
         getItem("Areas", "areas"),
         getItem("Add Area", "addArea"),
       ]),
-      getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
-        getItem("Payments", "payments"),
-        getItem("Add Payments", "addPayment"),
-      ]),
+      // getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
+      //   getItem("Payments", "payments"),
+      //   getItem("Add Payments", "addPayment"),
+      // ]),
     ];
     const addCommonItems = (newItems: MenuItem[]) => {
       let newArray = commonTopItems.concat(newItems);
