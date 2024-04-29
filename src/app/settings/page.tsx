@@ -12,14 +12,16 @@ import {
 } from "@/forms/employee/employeeForm";
 import UpdateEmployeeForm from "@/forms/employee/updateEmployeeForm";
 import AddUserForm from "@/forms/user/addUserForm";
+import { useSystemStore } from "@/stores/systemStore";
 import { useUserStore } from "@/stores/userStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Flex, Card } from "antd";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Settings = () => {
-  const router = useRouter();
+  const setHeader = useSystemStore((state) => state.setHeader);
   const { windowWidth } = useWindow();
   const { getEmployee, updateEmployee } = useAPIController();
   const user = useUserStore((state) => state.user);
@@ -36,6 +38,9 @@ const Settings = () => {
       refetch();
     },
   });
+  useEffect(() => {
+    setHeader("Settings")
+  })
   const initialValues: IUpdateEmployeeForm = {
     ...UpdateEmployeeFormInitialValues,
     ...data?.data,
@@ -68,7 +73,7 @@ const Settings = () => {
             style={{ width: `${windowWidth * 0.64}px` }}
           >
             <Flex vertical gap="small" style={{ width: "100%" }}>
-                <AddUserForm />
+              <AddUserForm />
               <FormButton center text="Update" isSubmit />
             </Flex>
           </Card>
