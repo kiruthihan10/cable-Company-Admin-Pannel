@@ -169,6 +169,7 @@ const Navbar = (props: INavbar) => {
           position: "absolute",
           top: 180,
           left: 300,
+          marginRight: 20,
         }}
       >
         {children}
