@@ -49,16 +49,9 @@ const Employees = () => {
   };
   const columns = [
     {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
-      sorter: true,
-    },
-    {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
-      sorter: true,
+      title: "Name",
+      key: "name",
+      render: (_: any, record: ISingleEmployeeResponse) => `${record.firstName[0]}.${record.lastName}`,
     },
     {
       title: "Admin",
@@ -66,11 +59,6 @@ const Employees = () => {
       key: "isAdmin",
       sorter: true,
       render: renderAdmin,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
     },
     {
       title: "Phone Number",
@@ -82,18 +70,6 @@ const Employees = () => {
       title: "Customers",
       dataIndex: "totalCustomers",
       key: "totalCustomers",
-      sorter: true,
-    },
-    {
-      title: "Payments Collected",
-      dataIndex: "totalPaymentCollections",
-      key: "totalPaymentCollections",
-      sorter: true,
-    },
-    {
-      title: "Payments Generated",
-      dataIndex: "totalPaymentGeneration",
-      key: "totalPaymentGeneration",
       sorter: true,
     },
     {
