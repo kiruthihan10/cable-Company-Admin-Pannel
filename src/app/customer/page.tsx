@@ -52,21 +52,9 @@ const Customers = () => {
   };
   const columns = [
     {
-      title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
-      sorter: true,
-    },
-    {
-      title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
-      sorter: true,
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Name",
+      key: "name",
+      render: (_: any, record: ISingleCustomerResponse) => `${record.firstName[0]}.${record.lastName}`,
     },
     {
       title: "Phone Number",
@@ -77,11 +65,7 @@ const Customers = () => {
       title: "Address",
       dataIndex: "address",
       key: "address",
-    },
-    {
-      title: "Box CA No",
-      dataIndex: "boxCaNumber",
-      key: "boxCaNumber",
+      width: "20%"
     },
     {
       title: "Customer No",
@@ -89,44 +73,35 @@ const Customers = () => {
       key: "customerNo",
     },
     {
-      title: "Connection Status",
+      title: "Box CA No",
+      dataIndex: "boxCaNumber",
+      key: "boxCaNumber",
+    },
+    {
+      title: "Active",
       dataIndex: "activeConnection",
       key: "activeConnection",
       render: renderSwitch,
+      width: "10%"
     },
     {
       title: "Digital?",
       dataIndex: "hasDigitalBox",
       key: "hasDigitalBox",
       render: renderSwitch,
+      width: "10%"
     },
     {
-      title: "Power Intake",
-      dataIndex: "offerPowerIntake",
-      key: "offerPowerIntake",
-      render: renderSwitch,
-    },
-    {
-      title: "Disconnected",
+      title: "Permanant Disconnect",
       dataIndex: "isDisconnected",
       key: "isDisconnected",
       render: renderSwitch,
+      width: "10%"
     },
     {
       title: "Start Date",
       dataIndex: "connectionStartDate",
       key: "connectionStartDate",
-    },
-    {
-      title: "Payment Count",
-      dataIndex: "totalPayments",
-      key: "totalPayments",
-    },
-    {
-      title: "Payment Paid",
-      dataIndex: "totalPaymentsPaid",
-      key: "totalPaymentsPaid",
-      render: renderCurrency,
     },
   ];
   const paginationChange = (page: number, pageSize: number) => {
