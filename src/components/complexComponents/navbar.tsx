@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/stores/userStore";
 import Icon from "@mdi/react";
-import { Menu, MenuProps, Spin } from "antd";
+import { Menu, MenuProps, Space, Spin } from "antd";
 import {
   mdiDomain,
   mdiAccountHardHat,
@@ -162,7 +162,7 @@ const Navbar = (props: INavbar) => {
     return <Spin />;
   }
   return (
-    <div>
+    <Space>
       {menuComponent}
       <div
         style={{
@@ -173,7 +173,7 @@ const Navbar = (props: INavbar) => {
       >
         {children}
       </div>
-    </div>
+    </Space>
   );
 };
 

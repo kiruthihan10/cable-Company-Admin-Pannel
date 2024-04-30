@@ -4,6 +4,7 @@ import { useSystemStore } from "@/stores/systemStore";
 import { Divider, Flex, Typography } from "antd";
 
 const Header = () => {
+  const isDarkMode = useSystemStore((state) => state.isDarkMode);
   const header = useSystemStore((state) => state.header);
   return (
     <Flex
@@ -15,7 +16,7 @@ const Header = () => {
         borderBottom: "1px solid black",
         height: 120,
         zIndex: 1,
-        background: "white",
+        background: isDarkMode ? "#141414" : "white",
       }}
     >
       <Flex align="center" style={{ width: "100%" }}>
