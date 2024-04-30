@@ -23,7 +23,7 @@ const AddCustomer = () => {
   const setHeader = useSystemStore((state) => state.setHeader);
   const { addCustomer, getAreas } = useAPIController();
   useEffect(() => {
-    setHeader("Add Customer");
+    setHeader("Customers");
   });
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.customer],
@@ -66,7 +66,7 @@ const AddCustomer = () => {
         >
           <Form>
             <Card
-              title={"Add Employee"}
+              title={"Add New Customer"}
               style={{ width: `${windowWidth * 0.64}px` }}
             >
               <Flex vertical gap="small" style={{ width: "100%" }}>
