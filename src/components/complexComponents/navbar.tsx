@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/stores/userStore";
 import Icon from "@mdi/react";
-import { Menu, MenuProps, Space, Spin } from "antd";
+import { Menu, MenuProps, Space, Spin, notification } from "antd";
 import {
   mdiDomain,
   mdiAccountHardHat,
@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { urls } from "@/constants";
 import { useWindow } from "@/external/utils";
+import { useSystemStore } from "@/stores/systemStore";
 
 interface INavbar {
   children: React.ReactNode;
@@ -44,6 +45,9 @@ function getItem(
 const Navbar = (props: INavbar) => {
   const { children } = props;
   const router = useRouter();
+  const noticationProps = useSystemStore((state) => state.noticationProps);
+  const setNotification = useSystemStore((state) => state.setNotification);
+  const [api, contextHolder] = notification.useNotification();
   const user = useUserStore((state) => state.user);
   const removeUser = useUserStore((state) => state.removeUser);
   const [items, setItems] = useState<MenuItem[]>();
@@ -52,6 +56,15 @@ const Navbar = (props: INavbar) => {
   useEffect(() => {
     setShowSpinner(window.location.pathname === "/" && user?.username === "");
   }, [user?.username]);
+  useEffect(() => {
+    if (noticationProps != undefined) {
+      if (noticationProps.notificationType === undefined) {
+        api.open(noticationProps);
+      } else {
+        api[noticationProps.notificationType](noticationProps);
+      }
+    }
+  },[api, noticationProps]);
   useEffect(() => {
     const commonTopItems: MenuItem[] = [
       getItem("Home", "home", <Icon path={mdiHome} size={1} />),
@@ -173,6 +186,7 @@ const Navbar = (props: INavbar) => {
         }}
       >
         {children}
+        {contextHolder}
       </div>
     </Space>
   );

@@ -25,29 +25,29 @@ const AddEmployee = () => {
   useEffect(() => {
     setHeader("Add Employee");
   });
-  const [api, contextHolder] = notification.useNotification();
+  const setNotification = useSystemStore((state) => state.setNotification);
   const { addEmployee } = useAPIController();
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.employee],
     mutationFn: addEmployee,
     onSuccess: () => {
-      api.success({
+      setNotification({
         description: "Employee created successfully",
         message: "Success",
-      })
+        notificationType: "success",
+      });
       router.push(`/${urls.employee}`);
     },
     onError(error, _variables, _context) {
-      if(axios.isAxiosError(error))
-        {
-          if(error.response?.status ===409)
-            {
-              api.error({
-                description: "User with Phone Number Already Exists",
-                message: "Phone No Exists",
-              })
-            }
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setNotification({
+            description: "User with Phone Number Already Exists",
+            message: "Phone No Exists",
+            notificationType: "error",
+          });
         }
+      }
     },
   });
   const { windowWidth } = useWindow();
@@ -80,7 +80,6 @@ const AddEmployee = () => {
             </Card>
           </Form>
         </Flex>
-        {contextHolder}
       </>
     </Formik>
   );
