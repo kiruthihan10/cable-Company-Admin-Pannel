@@ -13,10 +13,11 @@ import {
 } from "@/forms/employee/employeeForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation } from "@tanstack/react-query";
-import { Flex, Card } from "antd";
+import { Flex, Card, notification } from "antd";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
 
 const AddEmployee = () => {
   const router = useRouter();
@@ -24,15 +25,32 @@ const AddEmployee = () => {
   useEffect(() => {
     setHeader("Add Employee");
   });
+  const [api, contextHolder] = notification.useNotification();
   const { addEmployee } = useAPIController();
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.employee],
     mutationFn: addEmployee,
     onSuccess: () => {
+      api.success({
+        description: "Employee created successfully",
+        message: "Success",
+      })
       router.push(`/${urls.employee}`);
     },
+    onError(error, _variables, _context) {
+      if(axios.isAxiosError(error))
+        {
+          if(error.response?.status ===409)
+            {
+              api.error({
+                description: "User with Phone Number Already Exists",
+                message: "Phone No Exists",
+              })
+            }
+        }
+    },
   });
-  const {windowWidth} = useWindow();
+  const { windowWidth } = useWindow();
   const onSubmit = (values: IAddEmployeeForm) => {
     mutate({ ...values, phoneNumber: values.phoneNumber || 0 });
   };
@@ -62,6 +80,7 @@ const AddEmployee = () => {
             </Card>
           </Form>
         </Flex>
+        {contextHolder}
       </>
     </Formik>
   );

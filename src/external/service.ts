@@ -65,8 +65,17 @@ export const useAPIController = () => {
   };
   const post = <T>(url: string, data?: any) => {
     return axios
-      .post<T>(baseURL + url, data)
+      .post<T>(baseURL + url, data, {
+        validateStatus: (status) => {
+          return status != 401 && status != 404 && status != 409;
+        },
+      })
       .catch(async (error: Error | AxiosError) => {
+        if (axios.isAxiosError(error)) {
+          if (error.status != 401) {
+            throw error;
+          }
+        }
         handleUnAuth(error);
       });
   };
