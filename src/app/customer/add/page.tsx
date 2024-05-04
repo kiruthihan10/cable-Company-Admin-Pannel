@@ -14,6 +14,7 @@ import {
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Flex, Card } from "antd";
+import axios from "axios";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -25,11 +26,28 @@ const AddCustomer = () => {
   useEffect(() => {
     setHeader("Customers");
   });
+  const setNotification = useSystemStore((state) => state.setNotification);
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.customer],
     mutationFn: addCustomer,
     onSuccess: () => {
+      setNotification({
+        description: "Customer created successfully",
+        message: "Success",
+        notificationType: "success",
+      });
       router.push(`/${urls.customer}`);
+    },
+    onError(error, _variables, _context) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setNotification({
+            description: "User with Phone Number Already Exists",
+            message: "Phone Number Exists",
+            notificationType: "error",
+          });
+        }
+      }
     },
   });
   const { data, isLoading } = useQuery({
