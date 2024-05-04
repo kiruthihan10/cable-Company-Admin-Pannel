@@ -10,11 +10,13 @@ import {
 } from "@/forms/company/companyForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import { Formik } from "formik";
 import { useEffect } from "react";
 
 const AddCompany = () => {
   const setHeader = useSystemStore((state) => state.setHeader);
+  const setNotification = useSystemStore((state) => state.setNotification);
   useEffect(() => {
     setHeader("Add Companies");
   });
@@ -23,7 +25,17 @@ const AddCompany = () => {
     mutationKey: [mutationKeys.login],
     mutationFn: addCompany,
     onSuccess(data, _variables, _context) {},
-    onError(_error) {},
+    onError(error, _variables, _context) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setNotification({
+            description: "User with Phone Number Already Exists",
+            message: "Phone No Exists",
+            notificationType: "error",
+          });
+        }
+      }
+    },
   });
   const onSubmit = (values: IAddCompanyForm) => {
     mutate({

@@ -13,11 +13,11 @@ import {
 } from "@/forms/employee/employeeForm";
 import { useSystemStore } from "@/stores/systemStore";
 import { useMutation } from "@tanstack/react-query";
-import { Flex, Card, notification } from "antd";
+import { Flex, Card } from "antd";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
+import { useEffect } from "react";
+import axios from "axios";
 
 const AddEmployee = () => {
   const router = useRouter();
