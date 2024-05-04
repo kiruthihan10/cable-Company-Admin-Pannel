@@ -15,8 +15,8 @@ const LoginForm = () => {
         justify={"center"}
         align={"center"}
         style={{
-          height: `${windowHeight * 0.8}px`,
-          width: `${windowWidth - 250}px`,
+          height: `${windowHeight - 180}px`,
+          width: `${windowWidth * 0.9}px`,
         }}
       >
         <Card title={"Login"} style={{ width: 300 }}>

@@ -64,7 +64,7 @@ const Navbar = (props: INavbar) => {
         api[noticationProps.notificationType](noticationProps);
       }
     }
-  },[api, noticationProps]);
+  }, [api, noticationProps]);
   useEffect(() => {
     const commonTopItems: MenuItem[] = [
       getItem("Home", "home", <Icon path={mdiHome} size={1} />),
@@ -178,12 +178,19 @@ const Navbar = (props: INavbar) => {
     <Space>
       {menuComponent}
       <div
-        style={{
-          position: "absolute",
-          top: 180,
-          left: 300,
-          marginRight: 20,
-        }}
+        style={
+          user
+            ? {
+                position: "absolute",
+                top: 180,
+                left: 300,
+                marginRight: 20,
+              }
+            : {
+                position: "absolute",
+                top: 180,
+              }
+        }
       >
         {children}
         {contextHolder}

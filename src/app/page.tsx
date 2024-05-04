@@ -18,17 +18,28 @@ export default function Login() {
   const setUserType = useUserStore((state) => state.setUserType);
   const setToken = useUserStore((state) => state.setToken);
   const setHeader = useSystemStore((state) => state.setHeader);
+  const setNotification = useSystemStore((state) => state.setNotification);
   const user = useUserStore((state) => state.user);
   const router = useRouter();
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.login],
     mutationFn: MutateLogin,
-    onSuccess(data, _variables, _context) {
+    onSuccess(data, variables, _context) {
+      setUser(variables);
       setUserType(data.role);
       setToken(data.token);
+      setNotification({
+        message: `Welcome ${variables.username}`,
+        notificationType: "success",
+      });
       router.push(urls.home);
     },
     onError(_error) {
+      setNotification({
+        description: "Invalid Username or Password",
+        message: "Login Error",
+        notificationType: "error",
+      });
       // setShowModal(true);
     },
   });
@@ -48,21 +59,16 @@ export default function Login() {
   });
 
   const onLogin = (values: ILoginRequest) => {
-    if (setUser) {
-      setUser(values);
-    }
     return mutate(values);
   };
   return (
-    <main>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={loginSchema}
-        enableReinitialize
-        onSubmit={onLogin}
-      >
-        <LoginForm />
-      </Formik>
-    </main>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={loginSchema}
+      enableReinitialize
+      onSubmit={onLogin}
+    >
+      <LoginForm />
+    </Formik>
   );
 }
