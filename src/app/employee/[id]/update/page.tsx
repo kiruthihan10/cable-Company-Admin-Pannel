@@ -9,7 +9,6 @@ import {
 import { Flex, Card } from "antd";
 import { Formik, Form } from "formik";
 import { IEmployeePageProps } from "../page";
-import { useState, useEffect } from "react";
 import { mutationKeys, queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -17,6 +16,8 @@ import UpdateEmployeeForm from "@/forms/employee/updateEmployeeForm";
 import { useRouter } from "next/navigation";
 import { urls } from "@/constants";
 import { useWindow } from "@/external/utils";
+import { useSystemStore } from "@/stores/systemStore";
+import axios from "axios";
 
 const UpdateEmployee = (props: IEmployeePageProps) => {
   const { params } = props;
@@ -24,6 +25,7 @@ const UpdateEmployee = (props: IEmployeePageProps) => {
   const router = useRouter();
   const {windowWidth} = useWindow();
   const { getEmployee, updateEmployee } = useAPIController();
+  const setNotification = useSystemStore((state) => state.setNotification);
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {
       return getEmployee(queryKey[1]);
@@ -34,7 +36,23 @@ const UpdateEmployee = (props: IEmployeePageProps) => {
     mutationKey: [mutationKeys.employee],
     mutationFn: updateEmployee,
     onSuccess: () => {
+      setNotification({
+        description: "Employee Updated successfully",
+        message: "Success",
+        notificationType: "success",
+      });
       router.push(`/${urls.employee}/${id}`);
+    },
+    onError(error, _variables, _context) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setNotification({
+            description: "User with Phone Number Already Exists",
+            message: "Phone No Exists",
+            notificationType: "error",
+          });
+        }
+      }
     },
   });
   const initialValues: IUpdateEmployeeForm = {

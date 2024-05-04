@@ -16,12 +16,15 @@ import FormButton from "@/components/unitComponents/formComponents/button";
 import { Flex, Card } from "antd";
 import { Formik, Form } from "formik";
 import UpdateCustomerForm from "@/forms/customer/updateCustomerForm";
+import { useSystemStore } from "@/stores/systemStore";
+import axios from "axios";
 
 const UpdateCustomer = (props: ICustomerPageProps) => {
   const { params } = props;
   const { id } = params;
   const router = useRouter();
   const { windowWidth } = useWindow();
+  const setNotification = useSystemStore((state) => state.setNotification);
   const { getCustomer, updateCustomer, getAreas } = useAPIController();
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: ({ queryKey }) => {
@@ -39,7 +42,23 @@ const UpdateCustomer = (props: ICustomerPageProps) => {
     mutationKey: [mutationKeys.employee],
     mutationFn: updateCustomer,
     onSuccess: () => {
+      setNotification({
+        description: "Customer Updated successfully",
+        message: "Success",
+        notificationType: "success",
+      });
       router.push(`/${urls.customer}/${id}`);
+    },
+    onError(error, _variables, _context) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          setNotification({
+            description: "User with Phone Number Already Exists",
+            message: "Phone No Exists",
+            notificationType: "error",
+          });
+        }
+      }
     },
   });
   const initialValues: IUpdateCustomerForm = {
