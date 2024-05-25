@@ -58,6 +58,9 @@ const Navbar = (props: INavbar) => {
   useEffect(() => {
     return () => {
       setTimeout(() => {
+        if(window.location.pathname === "/" && user?.username === "") {
+          removeUser()
+        }
         setShowSpinner(false);
       }, 2000);
     };
