@@ -46,7 +46,6 @@ const Navbar = (props: INavbar) => {
   const { children } = props;
   const router = useRouter();
   const noticationProps = useSystemStore((state) => state.noticationProps);
-  const setNotification = useSystemStore((state) => state.setNotification);
   const [api, contextHolder] = notification.useNotification();
   const user = useUserStore((state) => state.user);
   const removeUser = useUserStore((state) => state.removeUser);

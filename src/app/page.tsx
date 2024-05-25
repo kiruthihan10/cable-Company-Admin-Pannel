@@ -21,6 +21,9 @@ export default function Login() {
   const setNotification = useSystemStore((state) => state.setNotification);
   const user = useUserStore((state) => state.user);
   const router = useRouter();
+  useEffect(() => {
+    setHeader("Login");
+  });
   const { mutate } = useMutation({
     mutationKey: [mutationKeys.login],
     mutationFn: MutateLogin,
@@ -42,9 +45,6 @@ export default function Login() {
       });
       // setShowModal(true);
     },
-  });
-  useEffect(() => {
-    setHeader("Login");
   });
   if (user?.token != null) {
     router.push(`/${urls.home}`);
