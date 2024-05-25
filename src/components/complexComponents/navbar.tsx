@@ -55,7 +55,13 @@ const Navbar = (props: INavbar) => {
   const [showSpinner, setShowSpinner] = useState(true);
   useEffect(() => {
     setShowSpinner(window.location.pathname === "/" && user?.username === "");
-  }, [user?.username]);
+    return () => {
+      setTimeout(() => {
+        if (window.location.pathname === "/" && user?.username === "")
+          removeUser();
+      }, 2000);
+    };
+  }, [removeUser, user?.username]);
   useEffect(() => {
     if (noticationProps != undefined) {
       if (noticationProps.notificationType === undefined) {
