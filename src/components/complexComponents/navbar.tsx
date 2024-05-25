@@ -58,13 +58,18 @@ const Navbar = (props: INavbar) => {
   useEffect(() => {
     return () => {
       setTimeout(() => {
-        if(window.location.pathname === "/" && user?.username === "") {
-          removeUser()
+        if (window.location.pathname === "/" && user?.username === "") {
+          removeUser();
         }
         setShowSpinner(false);
       }, 2000);
     };
   });
+  useEffect(() => {
+    if (user?.username === null || user?.username === "") {
+      router.push("/");
+    }
+  }, [router, user?.username]);
   useEffect(() => {
     if (noticationProps != undefined) {
       if (noticationProps.notificationType === undefined) {
