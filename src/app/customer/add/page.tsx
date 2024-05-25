@@ -17,7 +17,7 @@ import { Flex, Card } from "antd";
 import axios from "axios";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const AddCustomer = () => {
   const router = useRouter();
@@ -64,6 +64,16 @@ const AddCustomer = () => {
       areaID: values.areaID || -1,
     });
   };
+
+  if (data?.data.areas.length == 0) {
+    router.push(`/${urls.area}/${urls.add}`);
+    setNotification({
+      description: "No Areas Available",
+      message: "Create a New Area before creating an Employee",
+      notificationType: "error",
+    });
+    return <></>;
+  }
 
   return (
     <Formik
