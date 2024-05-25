@@ -39,7 +39,7 @@ interface ILoginResponse {
 
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://skpt-skpt.koyeb.app/api"
+    ? "https://cablecompanies.azurewebsites.net/"
     : "http://127.0.0.1:5054";
 
 export const login = (req: ILoginRequest) => {
