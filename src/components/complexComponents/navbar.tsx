@@ -56,8 +56,6 @@ const Navbar = (props: INavbar) => {
     setShowSpinner(window.location.pathname === "/" && user?.username === "");
     return () => {
       setTimeout(() => {
-        if (window.location.pathname === "/" && user?.username === "")
-          removeUser();
         setShowSpinner(false);
       }, 2000);
     };
