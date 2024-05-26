@@ -7,7 +7,7 @@ export interface IPasswordForm {
 }
 
 export const PasswordFormInitialValues: IPasswordForm = {
-  password: "",
+  password: "123456789",
 };
 
 export const PasswordFormValidation: Yup.ObjectSchema<IPasswordForm> =

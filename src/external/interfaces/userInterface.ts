@@ -7,7 +7,7 @@ export interface ISingleUserResponse {
 }
 
 export interface IBaseUserRequest {
-  email: string;
+  email?: string;
   firstName: string;
   lastName: string;
   phoneNumber: number;
