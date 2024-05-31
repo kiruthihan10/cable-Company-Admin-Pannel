@@ -95,11 +95,7 @@ const Navbar = (props: INavbar) => {
       getItem(
         "Employee",
         "employee",
-        <Icon path={mdiAccountHardHat} size={1} />,
-        [
-          getItem("Employees", "employees"),
-          getItem("Add Employee", "addEmployee"),
-        ]
+        <Icon path={mdiAccountHardHat} size={1} />
       ),
     ];
     const AdminItems: MenuItem[] = [
@@ -110,16 +106,9 @@ const Navbar = (props: INavbar) => {
       getItem(
         "Employee",
         "employee",
-        <Icon path={mdiAccountHardHat} size={1} />,
-        [
-          getItem("Employees", "employees"),
-          getItem("Add Employee", "addEmployee"),
-        ]
+        <Icon path={mdiAccountHardHat} size={1} />
       ),
-      getItem("Area", "area", <Icon path={mdiSignDirection} size={1} />, [
-        getItem("Areas", "areas"),
-        getItem("Add Area", "addArea"),
-      ]),
+      getItem("Area", "area", <Icon path={mdiSignDirection} size={1} />),
       // getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
       //   getItem("Payments", "payments"),
       //   getItem("Add Payments", "addPayment"),
@@ -171,13 +160,13 @@ const Navbar = (props: INavbar) => {
               removeUser();
               router.push("/");
               break;
-            case "employees":
+            case "employee":
               router.push(`/${urls.employee}`);
               break;
             case "addEmployee":
               router.push(`/${urls.employee}/${urls.add}`);
               break;
-            case "areas":
+            case "area":
               router.push(`/${urls.area}`);
           }
         }}
