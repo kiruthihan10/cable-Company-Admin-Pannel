@@ -130,11 +130,17 @@ export const useAPIController = () => {
       addEmployeeRequest
     );
   };
-  const getCustomers = (page?: number, size?: number, orderBy?: string) => {
+  const getCustomers = (
+    page?: number,
+    size?: number,
+    orderBy?: string,
+    searchText?: string
+  ) => {
     return get<ICustomersResponse>("/Customer", {
       page,
       size,
       orderBy,
+      searchText,
     });
   };
   const addCustomer = (addCustomerRequest: IAddCustomerRequest) => {

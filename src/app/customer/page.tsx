@@ -6,12 +6,21 @@ import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
-import { Divider, Switch, Table, TablePaginationConfig } from "antd";
+import {
+  Col,
+  Divider,
+  Input,
+  Row,
+  Switch,
+  Table,
+  TablePaginationConfig,
+} from "antd";
 import { FilterValue, SorterResult } from "antd/es/table/interface";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { urls } from "@/constants";
+import { SearchProps } from "antd/es/input/Search";
 
 const Customers = () => {
   const router = useRouter();
@@ -21,6 +30,7 @@ const Customers = () => {
   const [size, setSize] = useState<number | undefined>(undefined);
   const [sortColumn, setSortColumn] = useState<string | undefined>(undefined);
   const [customers, setCustomers] = useState<ISingleCustomerResponse[]>([]);
+  const [searchText, setSearchText] = useState<string>("");
   useEffect(() => {
     setHeader("Customers");
   });
@@ -29,10 +39,11 @@ const Customers = () => {
       return getCustomers(
         Number(queryKey[1]),
         queryKey[2] === undefined ? undefined : Number(queryKey[2]),
-        String(queryKey[3])
+        String(queryKey[3]),
+        String(queryKey[4])
       );
     },
-    queryKey: [queryKeys.customers, pageNumber, size, sortColumn],
+    queryKey: [queryKeys.customers, pageNumber, size, sortColumn, searchText],
   });
   useEffect(() => {
     setCustomers(data?.data.customers || []);
@@ -47,6 +58,7 @@ const Customers = () => {
       />
     );
   };
+  const { Search } = Input;
   const renderCurrency = (amount: number) => {
     return `${amount} LKR`;
   };
@@ -54,7 +66,8 @@ const Customers = () => {
     {
       title: "Name",
       key: "name",
-      render: (_: any, record: ISingleCustomerResponse) => `${record.firstName[0]}.${record.lastName}`,
+      render: (_: any, record: ISingleCustomerResponse) =>
+        `${record.firstName[0]}.${record.lastName}`,
     },
     {
       title: "Phone Number",
@@ -65,7 +78,7 @@ const Customers = () => {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      width: "20%"
+      width: "20%",
     },
     {
       title: "Customer No",
@@ -82,21 +95,21 @@ const Customers = () => {
       dataIndex: "activeConnection",
       key: "activeConnection",
       render: renderSwitch,
-      width: "10%"
+      width: "10%",
     },
     {
       title: "Digital?",
       dataIndex: "hasDigitalBox",
       key: "hasDigitalBox",
       render: renderSwitch,
-      width: "10%"
+      width: "10%",
     },
     {
       title: "Permanant Disconnect",
       dataIndex: "isDisconnected",
       key: "isDisconnected",
       render: renderSwitch,
-      width: "10%"
+      width: "10%",
     },
     {
       title: "Start Date",
@@ -141,9 +154,23 @@ const Customers = () => {
     };
     return { onClick };
   };
+  const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
+    setSearchText(value);
   return (
     <>
-      <AppButton text={"Add New Customer"} onClick={createCustomer} />
+      <Row>
+        <Col span={8}>
+          <AppButton text={"Add New Customer"} onClick={createCustomer} />
+        </Col>
+        <Col span={8} offset={8}>
+          <Search
+            placeholder="Phone Number / Customer Number / NIC"
+            allowClear
+            onSearch={onSearch}
+          />
+        </Col>
+      </Row>
+
       <Divider />
       <Table
         dataSource={customers}
