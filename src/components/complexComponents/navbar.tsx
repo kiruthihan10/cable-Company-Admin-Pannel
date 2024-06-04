@@ -2,7 +2,16 @@
 
 import { useUserStore } from "@/stores/userStore";
 import Icon from "@mdi/react";
-import { Menu, MenuProps, Space, Spin, notification } from "antd";
+import {
+  Button,
+  Drawer,
+  Menu,
+  MenuProps,
+  Space,
+  Spin,
+  Tooltip,
+  notification,
+} from "antd";
 import {
   mdiDomain,
   mdiAccountHardHat,
@@ -12,6 +21,7 @@ import {
   mdiHome,
   mdiCog,
   mdiLogout,
+  mdiArrowRight,
 } from "@mdi/js";
 
 import { useEffect, useState } from "react";
@@ -52,6 +62,16 @@ const Navbar = (props: INavbar) => {
   const [items, setItems] = useState<MenuItem[]>();
   const { windowHeight } = useWindow();
   const [showSpinner, setShowSpinner] = useState(true);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [expandButtonLeft, setExpandButtonLeft] = useState(15);
+  const showDrawer = () => {
+    setShowNavbar(true);
+  };
+
+  const onClose = () => {
+    setShowNavbar(false);
+  };
+
   useEffect(() => {
     setShowSpinner(window.location.pathname === "/" && user?.username === "");
   }, [user?.username]);
@@ -130,9 +150,10 @@ const Navbar = (props: INavbar) => {
       style={{
         width: 256,
         position: "fixed",
-        top: 120,
         height: windowHeight - 120,
         borderTop: "1px solid black",
+        left: 0,
+        top: 120,
       }}
     >
       <Menu
@@ -141,6 +162,7 @@ const Navbar = (props: INavbar) => {
           height: windowHeight - 100,
         }}
         onClick={(key) => {
+          setShowNavbar(false);
           switch (key.key) {
             case "home":
               router.push(`/${urls.home}`);
@@ -168,6 +190,10 @@ const Navbar = (props: INavbar) => {
               break;
             case "area":
               router.push(`/${urls.area}`);
+              break;
+            case "settings":
+              router.push(`/${urls.settings}`)
+              break;
           }
         }}
       />
@@ -177,17 +203,47 @@ const Navbar = (props: INavbar) => {
     // Allow Store to load
     return <Spin />;
   }
+  const collapsableMenuComponent = showNavbar ? (
+    <Drawer
+      placement="left"
+      open={true}
+      closable={false}
+      onClose={onClose}
+      key="left"
+      rootStyle={{ padding: 0, paddingTop: 0 }}
+      style={{ position: "absolute", top: 120, padding: 0, paddingTop: 0 }}
+      width={256}
+    >
+      {menuComponent}
+    </Drawer>
+  ) : (
+    <Tooltip title="Expand">
+      <Button
+        type="primary"
+        shape="circle"
+        icon={<Icon path={mdiArrowRight} size={1} />}
+        style={{
+          position: "fixed",
+          top: windowHeight / 2,
+          left: -{ expandButtonLeft },
+          zIndex: 10,
+        }}
+        onClick={showDrawer}
+      />
+    </Tooltip>
+  );
   return (
     <Space>
-      {menuComponent}
+      {collapsableMenuComponent}
       <div
         style={
           user
             ? {
                 position: "absolute",
                 top: 180,
-                left: 300,
+                left: 20,
                 marginRight: 20,
+                right: 20,
               }
             : {
                 position: "absolute",

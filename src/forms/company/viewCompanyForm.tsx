@@ -79,9 +79,6 @@ const ViewCompanyForm = (props: IViewCompanyForm) => {
     <>
       <Flex
         justify={"center"}
-        style={{
-          width: `${windowWidth * 0.8}px`,
-        }}
       >
         <Form>
           <Card

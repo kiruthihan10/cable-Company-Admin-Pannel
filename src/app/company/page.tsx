@@ -121,6 +121,16 @@ const Companies = () => {
     }
   };
 
+  const onRow = (
+    record: ISingleCompanyResponse,
+    _rowIndex: number | undefined
+  ) => {
+    const onClick = () => {
+      router.push(`/${urls.company}/${record.id}`);
+    };
+    return { onClick };
+  };
+
   const generateRowKey = (record: ISingleCompanyResponse) => {
     return record.id;
   };
@@ -142,6 +152,7 @@ const Companies = () => {
         }}
         onChange={onTableChange}
         rowKey={generateRowKey}
+        onRow={onRow}
       />
     </>
   );
