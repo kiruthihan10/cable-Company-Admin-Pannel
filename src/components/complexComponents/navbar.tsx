@@ -63,6 +63,7 @@ const Navbar = (props: INavbar) => {
   const { windowHeight } = useWindow();
   const [showSpinner, setShowSpinner] = useState(true);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [expandButtonLeft, setExpandButtonLeft] = useState(15);
   const showDrawer = () => {
     setShowNavbar(true);
   };
@@ -218,8 +219,10 @@ const Navbar = (props: INavbar) => {
         shape="circle"
         icon={<Icon path={mdiArrowRight} size={1} />}
         style={{
-          position: "absolute",
-          top: 500,
+          position: "fixed",
+          top: windowHeight / 2,
+          left: -{ expandButtonLeft },
+          zIndex: 10
         }}
         onClick={showDrawer}
       />
@@ -236,7 +239,7 @@ const Navbar = (props: INavbar) => {
                 top: 180,
                 left: showNavbar ? 300 : 20,
                 marginRight: 20,
-                right: showNavbar ? undefined : 0
+                right: showNavbar ? undefined : 0,
               }
             : {
                 position: "absolute",
