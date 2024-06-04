@@ -88,9 +88,6 @@ const AddCustomer = () => {
       <>
         <Flex
           justify={"center"}
-          style={{
-            width: `${windowWidth * 1}px`,
-          }}
         >
           <Form>
             <Card
