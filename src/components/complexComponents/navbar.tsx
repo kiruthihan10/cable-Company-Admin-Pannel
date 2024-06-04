@@ -222,7 +222,7 @@ const Navbar = (props: INavbar) => {
           position: "fixed",
           top: windowHeight / 2,
           left: -{ expandButtonLeft },
-          zIndex: 10
+          zIndex: 10,
         }}
         onClick={showDrawer}
       />
@@ -237,9 +237,9 @@ const Navbar = (props: INavbar) => {
             ? {
                 position: "absolute",
                 top: 180,
-                left: showNavbar ? 300 : 20,
+                left: 20,
                 marginRight: 20,
-                right: showNavbar ? undefined : 0,
+                right: 20,
               }
             : {
                 position: "absolute",
