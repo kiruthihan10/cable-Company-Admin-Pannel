@@ -190,6 +190,10 @@ const Navbar = (props: INavbar) => {
               break;
             case "area":
               router.push(`/${urls.area}`);
+              break;
+            case "settings":
+              router.push(`/${urls.settings}`)
+              break;
           }
         }}
       />
