@@ -20,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon2.png" type="image/png" sizes="512x512" />
+      </head>
       <StylingConfig>
         <Providers>
           <Header />
