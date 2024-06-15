@@ -6,5 +6,6 @@ export const urls = {
   employee: "employee",
   customer: "customer",
   area: "area",
-  settings: "settings"
+  settings: "settings",
+  payment: "payment"
 };

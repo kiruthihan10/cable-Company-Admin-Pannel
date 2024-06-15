@@ -3,6 +3,7 @@ export const queryKeys = {
   employees: "employees",
   customers: "customers",
   areas: "areas",
+  customerPayments: "customerPayments",
 };
 
 export const mutationKeys = {

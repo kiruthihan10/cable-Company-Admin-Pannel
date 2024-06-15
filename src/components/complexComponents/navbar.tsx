@@ -129,10 +129,10 @@ const Navbar = (props: INavbar) => {
         <Icon path={mdiAccountHardHat} size={1} />
       ),
       getItem("Area", "area", <Icon path={mdiSignDirection} size={1} />),
-      // getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
-      //   getItem("Payments", "payments"),
-      //   getItem("Add Payments", "addPayment"),
-      // ]),
+      getItem("Payment", "payment", <Icon path={mdiCash} size={1} />, [
+        getItem("Payments", "payments"),
+        getItem("Add Payments", "addPayment"),
+      ]),
     ];
     const addCommonItems = (newItems: MenuItem[]) => {
       let newArray = commonTopItems.concat(newItems);
@@ -192,7 +192,10 @@ const Navbar = (props: INavbar) => {
               router.push(`/${urls.area}`);
               break;
             case "settings":
-              router.push(`/${urls.settings}`)
+              router.push(`/${urls.settings}`);
+              break;
+            case "payments":
+              router.push(`/${urls.payment}`);
               break;
           }
         }}

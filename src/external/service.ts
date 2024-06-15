@@ -26,6 +26,7 @@ import {
   ISingleAreaResponse,
   IUpdateAreaRequest,
 } from "./interfaces/areaInterface";
+import { ICustomerPaymentsResponse } from "./interfaces/paymentInterface";
 
 export interface ILoginRequest {
   username: string;
@@ -180,6 +181,24 @@ export const useAPIController = () => {
     return post<IAreaResponse>(`/Area/${request.id}`, request);
   };
 
+  const getCustomerPayments = (
+    page?: number,
+    size?: number,
+    orderBy?: string,
+    customer?: string,
+    startDate?: string,
+    endDate?: string
+  ) => {
+    return get<ICustomerPaymentsResponse>("/Payment/CustomerPayment", {
+      page,
+      size,
+      orderBy,
+      customer,
+      startDate,
+      endDate
+    });
+  };
+
   return {
     getCompanies,
     addCompany,
@@ -197,5 +216,6 @@ export const useAPIController = () => {
     addArea,
     getArea,
     updateArea,
+    getCustomerPayments
   };
 };
