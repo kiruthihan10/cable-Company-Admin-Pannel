@@ -186,16 +186,16 @@ export const useAPIController = () => {
     size?: number,
     orderBy?: string,
     customer?: string,
-    startDate?: string,
-    endDate?: string
+    startDate?: string | undefined,
+    endDate?: string | undefined
   ) => {
     return get<ICustomerPaymentsResponse>("/Payment/CustomerPayment", {
       page,
       size,
       orderBy,
       customer,
-      startDate,
-      endDate
+      startDate: startDate === undefined ? null : startDate,
+      endDate: endDate === undefined ? null : endDate,
     });
   };
 
@@ -216,6 +216,6 @@ export const useAPIController = () => {
     addArea,
     getArea,
     updateArea,
-    getCustomerPayments
+    getCustomerPayments,
   };
 };

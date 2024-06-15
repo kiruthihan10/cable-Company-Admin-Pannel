@@ -8,7 +8,8 @@ import { queryKeys } from "@/external/keys";
 import { useAPIController } from "@/external/service";
 import { useSystemStore } from "@/stores/systemStore";
 import { useQuery } from "@tanstack/react-query";
-import { Divider, Table } from "antd";
+import { Col, DatePicker, Divider, Row, Table } from "antd";
+import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,8 @@ const PaymentsPage = () => {
   const { getCustomerPayments } = useAPIController();
   const setHeader = useSystemStore((State) => State.setHeader);
 
+  const [startDate, setStartDate] = useState<string | undefined>(undefined);
+  const [endDate, setEndDate] = useState<string | undefined>(undefined);
   const [pageNumber, setPageNumber] = useState(1);
   const [size, setSize] = useState<number | undefined>(undefined);
   useEffect(() => {
@@ -27,11 +30,22 @@ const PaymentsPage = () => {
       return getCustomerPayments(
         Number(queryKey[1]),
         queryKey[2] === undefined ? undefined : Number(queryKey[2]),
-        String(queryKey[3])
+        undefined,
+        undefined,
+        queryKey[3] === undefined ? undefined : String(queryKey[3]),
+        queryKey[4] === undefined ? undefined : String(queryKey[4])
       );
     },
-    queryKey: [queryKeys.customerPayments, pageNumber, size],
+    queryKey: [
+      queryKeys.customerPayments,
+      pageNumber,
+      size,
+      startDate,
+      endDate,
+    ],
   });
+
+  const { RangePicker } = DatePicker;
 
   const renderDiscriminator = (discriminator: string) => {
     let result = "";
@@ -107,9 +121,27 @@ const PaymentsPage = () => {
     };
     return { onClick };
   };
+  const onRangePickerUpdate = (dates: any, dateString: [string, string]) => {
+    setStartDate(dateString[0]);
+    setEndDate(dateString[1]);
+  };
   return (
     <>
-      <AppButton text={"Add New Area"} onClick={createPayment} />
+      <Row>
+        <Col span={8}>
+          <AppButton text={"Add New Payment"} onClick={createPayment} />
+        </Col>
+        <Col offset={12} span={4}>
+          <RangePicker
+            value={[
+              startDate !== undefined ? dayjs(startDate) : null,
+              endDate !== undefined ? dayjs(endDate) : null,
+            ]}
+            onChange={onRangePickerUpdate}
+            style={{ right: 0 }}
+          />
+        </Col>
+      </Row>
       <Divider />
       <Table
         dataSource={data?.data.payments}
