@@ -36,6 +36,7 @@ export interface ICustomerBase {
 
 export interface IAddCustomerRequest extends IAddUserRequest, ICustomerBase {
   areaID: number;
+  initialBilling: number;
 }
 
 export interface ICustomerResponse extends ISingleUserResponse, ICustomerBase {

@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import AppSelect from "@/components/unitComponents/formComponents/select";
 import { ISingleAreaResponse } from "@/external/interfaces/areaInterface";
 import { DefaultOptionType } from "antd/es/select";
+import AppNumberInput from "@/components/unitComponents/formComponents/numberInput";
 
 export interface IAddCustomerForm {
   areas: ISingleAreaResponse[];
@@ -80,17 +81,29 @@ const AddCustomerForm = (props: IAddCustomerForm) => {
         </div>
       </Flex>
       <Flex>
-        <div style={{ width: "25%" }}>
-          <AppSwitch name={"activeConnection"} label="Active" />
+        <div style={{ width: "50%" }}>
+          <AppNumberInput
+            name={"initialBilling"}
+            placeholder="Amount Pending when adding Customer"
+            label="Amount Pending"
+            addonBefore="Rs"
+          />
         </div>
-        <div style={{ width: "25%" }}>
-          <AppSwitch name={"hasDigitalBox"} label="Digital" />
-        </div>
-        <div style={{ width: "25%" }}>
-          <AppSwitch name={"offerPowerIntake"} label="Power Intake" />
-        </div>
-        <div style={{ width: "25%" }}>
-          <AppSwitch name={"isDisconnected"} label="Disconnected" />
+        <div style={{ width: "50%" }}>
+          <Flex>
+            <div style={{ width: "25%" }}>
+              <AppSwitch name={"activeConnection"} label="Active" />
+            </div>
+            <div style={{ width: "25%" }}>
+              <AppSwitch name={"hasDigitalBox"} label="Digital" />
+            </div>
+            <div style={{ width: "25%" }}>
+              <AppSwitch name={"offerPowerIntake"} label="Power Intake" />
+            </div>
+            <div style={{ width: "25%" }}>
+              <AppSwitch name={"isDisconnected"} label="Disconnected" />
+            </div>
+          </Flex>
         </div>
       </Flex>
     </>

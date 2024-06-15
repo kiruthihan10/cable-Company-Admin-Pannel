@@ -16,7 +16,9 @@ export interface ICustomerFormBase extends IUserForm, ICustomerBase {
   areaID: number | undefined;
 }
 
-export interface IAddCustomerForm extends ICustomerFormBase, IPasswordForm {}
+export interface IAddCustomerForm extends ICustomerFormBase, IPasswordForm {
+  initialBilling: number;
+}
 
 export interface IUpdateCustomerForm extends ICustomerFormBase {}
 
@@ -37,6 +39,7 @@ export const CustomerFormInitialValues: ICustomerFormBase = {
 export const AddCustomerFormInitialValues: IAddCustomerForm = {
   ...CustomerFormInitialValues,
   ...PasswordFormInitialValues,
+  initialBilling: 0,
 };
 
 export const UpdateCustomerFormInitialValues: IUpdateCustomerForm = {
@@ -58,7 +61,9 @@ export const CustomerFormValidation: Yup.ObjectSchema<ICustomerFormBase> =
   });
 
 export const AddCustomerFormValidation: Yup.ObjectSchema<IAddCustomerForm> =
-  CustomerFormValidation.concat(PasswordFormValidation).shape({});
+  CustomerFormValidation.concat(PasswordFormValidation).shape({
+    initialBilling: Yup.number().min(0).required(),
+  });
 
 export const UpdateCustomerFormValidation: Yup.ObjectSchema<IUpdateCustomerForm> =
   CustomerFormValidation.shape({});
