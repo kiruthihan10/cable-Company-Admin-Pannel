@@ -7,8 +7,8 @@ import {
 export interface ISingleEmployeeResponse extends ISingleUserResponse {
   isAdmin: boolean;
   totalCustomers: number;
-  totalPaymentCollections: number;
-  totalPaymentGeneration: number;
+  totalPaymentCollectionsCount: number;
+  totalPaymentGenerationAmount: number;
   totalAreasUnderControl: number;
 }
 

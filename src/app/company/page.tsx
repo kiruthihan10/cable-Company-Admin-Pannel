@@ -48,7 +48,6 @@ const Companies = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      sorter: true,
     },
     {
       title: "Contact Number",
@@ -59,37 +58,36 @@ const Companies = () => {
       title: "Contact Person",
       dataIndex: "contactPerson",
       key: "contactPerson",
-      sorter: true,
     },
     {
       title: "Joined Date",
       dataIndex: "joinedDate",
       key: "joinedDate",
-      sorter: true,
     },
     {
       title: "Total Customers",
       dataIndex: "totalCustomers",
       key: "totalCustomers",
-      sorter: true,
     },
     {
       title: "Total Employees",
       dataIndex: "totalEmployees",
       key: "totalEmployees",
-      sorter: true,
     },
     {
       title: "Total Payments",
-      dataIndex: "totalPayments",
+      dataIndex: "totalPaymentsAmount",
       key: "totalPayments",
-      sorter: true,
+    },
+    {
+      title: "Total Billings",
+      dataIndex : "totalBillingsAmount",
+      key : "totalBillingsAmount"
     },
     {
       title: "Total Areas",
       dataIndex: "totalAreas",
       key: "totalAreas",
-      sorter: true,
     },
   ];
 

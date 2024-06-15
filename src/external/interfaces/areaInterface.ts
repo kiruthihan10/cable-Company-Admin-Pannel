@@ -19,6 +19,8 @@ interface IBaseAreaResponse {
 
 export interface ISingleAreaResponse extends IBaseAreaResponse {
   noOfCustomers: number;
+  totalBillingsGeneratedAmount: number;
+  totalPaymentsCollectedAmount: number;
 }
 
 export interface IAreasResponse {

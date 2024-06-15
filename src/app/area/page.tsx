@@ -46,7 +46,6 @@ const Areas = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      sorter: true,
     },
     {
       title: "Agent Name",
@@ -55,13 +54,27 @@ const Areas = () => {
       render: (agent: IAreaAgent) => {
         return `${agent.firstName} ${agent.lastName}`;
       },
-      sorter: true,
     },
     {
       title: "No Of Customers",
       dataIndex: "noOfCustomers",
       key: "noOfCustomers",
-      sorter: true,
+    },
+    {
+      title: "Total Billings Generated",
+      dataIndex: "totalBillingsGeneratedAmount",
+      key: "totalBillingsGeneratedAmount",
+      render: (totalBillingsGeneratedAmount: number) => {
+        return `Rs ${totalBillingsGeneratedAmount}`;
+      },
+    },
+    {
+      title: "Total Payments Generated",
+      dataIndex: "totalPaymentsCollectedAmount",
+      key: "totalPaymentsCollectedAmount",
+      render: (totalPaymentsCollectedAmount: number) => {
+        return `Rs ${totalPaymentsCollectedAmount}`;
+      },
     },
   ];
   const paginationChange = (page: number, pageSize: number) => {

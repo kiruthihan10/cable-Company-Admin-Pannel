@@ -8,7 +8,8 @@ export interface ISingleCompanyResponse {
   contactPerson: string;
   totalCustomers: number;
   totalEmployees: number;
-  totalPayments: number;
+  totalPaymentsAmount: number;
+  totalBillingsAmount: number;
   totalAreas: number;
 }
 

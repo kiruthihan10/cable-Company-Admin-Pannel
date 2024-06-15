@@ -57,26 +57,32 @@ const Employees = () => {
       title: "Admin",
       dataIndex: "isAdmin",
       key: "isAdmin",
-      sorter: true,
       render: renderAdmin,
     },
     {
       title: "Phone Number",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      sorter: true,
     },
     {
       title: "Customers",
       dataIndex: "totalCustomers",
       key: "totalCustomers",
-      sorter: true,
     },
     {
       title: "Areas",
       dataIndex: "totalAreasUnderControl",
       key: "totalAreasUnderControl",
-      sorter: true,
+    },
+    {
+      title: "Collected Payment Counts",
+      dataIndex: "totalPaymentCollectionsCount",
+      key: "totalPaymentCollections",
+    },
+    {
+      title: "Generated Payment Counts",
+      key: "totalPaymentGeneration",
+      render : (_: any, record: ISingleEmployeeResponse) => `Rs ${record.totalPaymentGenerationAmount}`
     },
   ];
   const paginationChange = (page: number, pageSize: number) => {
