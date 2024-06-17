@@ -148,6 +148,9 @@ export const useAPIController = () => {
     return post<ICustomerResponse>("/Customer", {
       ...addCustomerRequest,
       connectionStartDate: addCustomerRequest.connectionStartDate.slice(0, 10),
+      billingRequest: {
+        amount: addCustomerRequest.initialBilling,
+      },
     });
   };
 
