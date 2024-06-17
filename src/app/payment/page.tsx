@@ -128,10 +128,7 @@ const PaymentsPage = () => {
   return (
     <>
       <Row>
-        <Col span={8}>
-          <AppButton text={"Add New Payment"} onClick={createPayment} />
-        </Col>
-        <Col offset={12} span={4}>
+        <Col>
           <RangePicker
             value={[
               startDate !== undefined ? dayjs(startDate) : null,
@@ -142,7 +139,6 @@ const PaymentsPage = () => {
           />
         </Col>
       </Row>
-      <Divider />
       <Table
         dataSource={data?.data.payments}
         columns={columns}
@@ -154,6 +150,7 @@ const PaymentsPage = () => {
         }}
         rowKey={generateRowKey}
         onRow={onRow}
+        style={{ paddingTop: 20 }}
       />
     </>
   );
