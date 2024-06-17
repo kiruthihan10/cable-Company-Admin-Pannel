@@ -30,7 +30,7 @@ const AddUserForm = () => {
             name="phoneNumber"
             placeholder="PhoneNumber"
             label="PhoneNumber"
-            addonBefore="07"
+            addonBefore="0"
           />
         </div>
       </Flex>

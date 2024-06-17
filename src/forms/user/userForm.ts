@@ -18,8 +18,8 @@ export const UserFormValidation: Yup.ObjectSchema<IUserForm> =
   Yup.object().shape({
     phoneNumber: Yup.number()
       .required()
-      .max(79999999, "Invalid Phone No")
-      .min(60000000, "Invalid Phone No"),
+      .max(779999999, "Invalid Phone No")
+      .min(600000000, "Invalid Phone No"),
     firstName: Yup.string().required("Required").max(50),
     lastName: Yup.string().required("Required").max(50),
     email: Yup.string().email(),
